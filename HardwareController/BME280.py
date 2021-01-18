@@ -3,7 +3,7 @@ from I2C_tools import I2C
 
 import smbus2
 import bme280
-
+#Documentation of the sensor: https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf 
 class BME280(Sensor):
 	__slots__ = 'address', 'port', 'bus'
 
