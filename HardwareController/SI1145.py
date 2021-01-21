@@ -25,6 +25,7 @@
 from Hardware  import Sensor, Meassurment
 from I2C_tools import I2C
 from smbus2 import SMBus
+import time
 
 # COMMANDS
 SI1145_PARAM_QUERY					= 0x80
@@ -151,59 +152,56 @@ SI1145_REG_CHIPSTAT					= 0x30
 SI1145_ADDR			     = 0x60
 
 class SI1145(I2C):
-	def __init__(self, address=SI1145_ADDR, port=I2C.get_default_bus()):
-		self._logger = logging.getLogger('SI1145')
-		# Create I2C device.
-		self._device = I2C.Device(address, port)
-
-		#reset device
+	def __init__(self, address=SI1145_ADDR, port=1):
+		self.setup(address= address, port=port)
 		self._reset()
-
-		# Load calibration values.
-		self._load_calibration()
+		self.calibrate()
 
 	# device reset
 	def _reset(self):
-		self._device.write8(SI1145_REG_MEASRATE0, 0)
-		self._device.write8(SI1145_REG_MEASRATE1, 0)
-		self._device.write8(SI1145_REG_IRQEN, 0)
-		self._device.write8(SI1145_REG_IRQMODE1, 0)
-		self._device.write8(SI1145_REG_IRQMODE2, 0)
-		self._device.write8(SI1145_REG_INTCFG, 0)
-		self._device.write8(SI1145_REG_IRQSTAT, 0xFF)
+		self.bus.write_byte(self.address,SI1145_REG_MEASRATE0, 0)
+		self.bus.write_byte(self.address,SI1145_REG_MEASRATE1, 0)
+		self.bus.write_byte(self.address,SI1145_REG_IRQEN, 0)
+		self.bus.write_byte(self.address,SI1145_REG_IRQMODE1, 0)
+		self.bus.write_byte(self.address,SI1145_REG_IRQMODE2, 0)
+		self.bus.write_byte(self.address,SI1145_REG_INTCFG, 0)
+		self.bus.write_byte(self.address,SI1145_REG_IRQSTAT, 0xFF)
 
-		self._device.write8(SI1145_REG_COMMAND, SI1145_RESET)
+		self.bus.write_byte(self.address,SI1145_REG_COMMAND, SI1145_RESET)
 		time.sleep(.01)
-		self._device.write8(SI1145_REG_HWKEY, 0x17)
+		self.bus.write_byte(self.address,SI1145_REG_HWKEY, 0x17)
 		time.sleep(.01)
 
 	# write Param
 	def writeParam(self, p, v):
-		self._device.write8(SI1145_REG_PARAMWR, v)
-		self._device.write8(SI1145_REG_COMMAND, p | SI1145_PARAM_SET)
-		paramVal = self._device.readU8(SI1145_REG_PARAMRD)
+		self.bus.write_byte(self.address,SI1145_REG_PARAMWR, v)
+		self.bus.write_byte(self.address,SI1145_REG_COMMAND, p | SI1145_PARAM_SET)
+		#paramVal = self._device.readU8(SI1145_REG_PARAMRD)
+		paramVal  = self.bus.read_byte_data(self.address, SI1145_REG_PARAMRD)
+		#print("writing param...")
+		#print(paramVal)
 		return paramVal
 
 	# load calibration to sensor
-	def _load_calibration(self):
+	def calibrate(self):
 		# /***********************************/
 		# Enable UVindex measurement coefficients!
-		self._device.write8(SI1145_REG_UCOEFF0, 0x29)
-		self._device.write8(SI1145_REG_UCOEFF1, 0x89)
-		self._device.write8(SI1145_REG_UCOEFF2, 0x02)
-		self._device.write8(SI1145_REG_UCOEFF3, 0x00)
+		self.bus.write_byte(self.address,SI1145_REG_UCOEFF0, 0x29)
+		self.bus.write_byte(self.address,SI1145_REG_UCOEFF1, 0x89)
+		self.bus.write_byte(self.address,SI1145_REG_UCOEFF2, 0x02)
+		self.bus.write_byte(self.address,SI1145_REG_UCOEFF3, 0x00)
 
 		# Enable UV sensor
 		self.writeParam(SI1145_PARAM_CHLIST, SI1145_PARAM_CHLIST_ENUV | SI1145_PARAM_CHLIST_ENALSIR | SI1145_PARAM_CHLIST_ENALSVIS | SI1145_PARAM_CHLIST_ENPS1)
 
 		# Enable interrupt on every sample
-		self._device.write8(SI1145_REG_INTCFG, SI1145_REG_INTCFG_INTOE)
-		self._device.write8(SI1145_REG_IRQEN, SI1145_REG_IRQEN_ALSEVERYSAMPLE)
+		self.bus.write_byte(self.address,SI1145_REG_INTCFG, SI1145_REG_INTCFG_INTOE)
+		self.bus.write_byte(self.address,SI1145_REG_IRQEN, SI1145_REG_IRQEN_ALSEVERYSAMPLE)
 
 		# /****************************** Prox Sense 1 */
 
 		# Program LED current
-		self._device.write8(SI1145_REG_PSLED21, 0x03) # 20mA for LED 1 only
+		self.bus.write_byte(self.address,SI1145_REG_PSLED21, 0x03) # 20mA for LED 1 only
 		self.writeParam(SI1145_PARAM_PS1ADCMUX, SI1145_PARAM_ADCMUX_LARGEIR)
 
 		# Prox sensor #1 uses LED #1
@@ -238,23 +236,40 @@ class SI1145(I2C):
 		self.writeParam(SI1145_PARAM_ALSVISADCMISC, SI1145_PARAM_ALSVISADCMISC_VISRANGE)
 
 		# measurement rate for auto
-		self._device.write8(SI1145_REG_MEASRATE0, 0xFF) # 255 * 31.25uS = 8ms
+		self.bus.write_byte(self.address,SI1145_REG_MEASRATE0, 0xFF) # 255 * 31.25uS = 8ms
 
 		# auto run
-		self._device.write8(SI1145_REG_COMMAND, SI1145_PSALS_AUTO)
+		self.bus.write_byte(self.address,SI1145_REG_COMMAND, SI1145_PSALS_AUTO)
 
 	# returns the UV index * 100 (divide by 100 to get the index)
 	def readUV(self):
-		return self._device.readU16LE(0x2C)
+		#return self._device.readU16LE(0x2C)
+		return self.bus.read_word_data(self.address, 0x2C)
 
 	#returns visible + IR light levels
 	def readVisible(self):
-		return self._device.readU16LE(0x22)
+		#return self._device.readU16LE(0x22)
+		return self.bus.read_word_data(self.address, 0x22)
 
 	#returns IR light levels
 	def readIR(self):
-		return self._device.readU16LE(0x24)
+		#return self._device.readU16LE(0x24)
+		return self.bus.read_word_data(self.address, 0x24)
 
 	# Returns "Proximity" - assumes an IR LED is attached to LED
 	def readProx(self):
-		return self._device.readU16LE(0x26)
+		#return self._device.readU16LE(0x26)
+		return self.bus.read_word_data(self.address, 0x26)
+
+	def measures(self):
+		return ["visible", "proximity", "uv", "ir"]
+
+	def measure(self):
+		return NotImplementedError
+
+if __name__ == '__main__':
+	si1145 = SI1145()
+	print(si1145.readUV())
+	print(si1145.readVisible())
+	print(si1145.readProx())
+	print(si1145.readIR())
