@@ -1,27 +1,20 @@
 from Hardware  import Sensor, Meassurment
 from I2C_tools import I2C
 
-import smbus2
+from smbus2 import SMBus
 import bme280
 
-class BME280(Sensor):
+class BME280(I2C):
 	__slots__ = 'address', 'port', 'bus'
 
 	def __init__(self, address=0x76, port=1):
-		self.address = address
-		self.port    = port
-		self.__online = self.is_online(reconnect=True)
-		self.bus   = smbus2.SMBus(port)
-		self.__calibration = bme280.load_calibration_params(self.bus, self.address)
+		self.setup(address=address, port=port)
 
-	def is_online(self, reconnect=False):
-		if(reconnect):
-			addr = I2C.scan()
-			self.__online = self.address in addr
-		return self.__online
+	def calibrate(self):
+		return bme280.load_calibration_params(self.bus, self.address)
 
 	def measure(self, property):
-		data = bme280.sample(self.bus, self.address, self.__calibration)
+		data = bme280.sample(self.bus, self.address, self.calibration)
 		#print(data.id)
 		messurment = Meassurment()
 		messurment.timestamp = data.timestamp
@@ -37,19 +30,7 @@ class BME280(Sensor):
 			messurment.unit  = "%"
 		else:
 			raise NotImplementedError
-
-		#print(data.temperature)
-		#print(data.pressure)
-		#print(data.humidity)
-		
-		#messurment.type  = 'temperature'
 		return messurment
-
-#print(data.timestamp)
-#print(data.temperature)
-#print(data.pressure)
-#print(data.humidity)
-		#raise NotImplementedError
 
 	def measures(self):
 		return ["temperature", "pressure", "humidity"]

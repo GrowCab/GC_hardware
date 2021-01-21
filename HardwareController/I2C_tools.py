@@ -1,7 +1,35 @@
 from smbus2 import SMBus
-#Based on the code from https://gist.github.com/kungpfui/54784ebc3b3ca72169c1839720b313bf 
-class I2C:
-	def scan(force=False):
+from Hardware  import Sensor, Meassurment
+from abc import ABC, abstractmethod, abstractproperty
+
+
+class I2C(Sensor):
+
+	def is_online(self, reconnect=False):
+		if(reconnect):
+			addr = I2C.scan(port=self.port)
+			self.__online = self.address in addr
+		return self.__online
+
+	def setup(self, address=None, port=None):
+		if address == None or port == None:
+			raise NotImplementedError
+		self.address = address
+		self.port    = port
+		self.__online = self.is_online(reconnect=True)
+		self.bus   = SMBus(port)
+		self.__calibration = self.calibrate()
+
+	@property
+	def calibration(self):
+		return self.__calibration
+
+	#@abstractmethod
+	def calibrate(self):
+		raise NotImplementedError
+
+	#Based on the code from https://gist.github.com/kungpfui/54784ebc3b3ca72169c1839720b313bf 
+	def scan(force=False, port=1):
 		devices = []
 		for addr in range(0x03, 0x77 + 1):
 			read = SMBus.read_byte, (addr,), {'force':force}
@@ -9,7 +37,7 @@ class I2C:
 
 			for func, args, kwargs in (read, write):
 				try:
-					with SMBus(1) as bus:
+					with SMBus(port) as bus:
 						data = func(bus, *args, **kwargs)
 						devices.append(addr)
 						break
@@ -18,6 +46,9 @@ class I2C:
 						# just busy, maybe permanent by a kernel driver or just temporary by some user code
 						pass
 		return devices
+ 
+
+
 
 if __name__ == '__main__':
 	for addr in I2C.scan(force=True):
