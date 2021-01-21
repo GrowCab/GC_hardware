@@ -5,7 +5,7 @@ from smbus2 import SMBus
 import bme280
 
 class BME280(I2C):
-	__slots__ = 'address', 'port', 'bus'
+#Documentation of the sensor: https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf 
 
 	def __init__(self, address=0x76, port=1):
 		self.setup(address=address, port=port)
@@ -19,7 +19,7 @@ class BME280(I2C):
 		messurment = Meassurment()
 		messurment.timestamp = data.timestamp
 		messurment.type = property
-		if messurment.type == "temperature":
+		if messurment.type   == "temperature":
 			messurment.value = data.temperature
 			messurment.unit  = "C"
 		elif messurment.type == "pressure":
