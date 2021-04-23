@@ -1,5 +1,5 @@
-from Hardware  import Sensor, Meassurment
-from I2C_tools import I2C
+from .Hardware  import Sensor, Meassurment
+from .I2C_tools import I2C
 import time
 from smbus2 import SMBus
 from datetime import datetime
