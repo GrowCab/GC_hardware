@@ -22,7 +22,7 @@ pip install GC_hardware
 where GC_hardware is the full or relative path to the project folder.
 
 
-Finally, to execute the deamon:
+Finally, to execute the daemon:
 
 ```bash
 python -m HardwareController
