@@ -19,12 +19,8 @@ class Chamber:
 @click.option('--chamber_id', default=1, show_default=True)
 @click.option('--measure_frequency', default=60, show_default=True)
 @click.version_option()
-def main(api_endpoint, chamber_id, measure_frequency, version):
+def main(api_endpoint, chamber_id, measure_frequency):
     print(f"GC_hardware - {VERSION}")
-
-    if version:
-        return
-
     print("Press CTRL-C to terminate")
     running = True
     try:
