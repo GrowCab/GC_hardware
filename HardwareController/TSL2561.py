@@ -1,4 +1,4 @@
-from .Hardware  import Sensor, Meassurment
+from .Hardware  import Sensor, Measurement
 from .I2C_tools import I2C
 import time
 from smbus2 import SMBus
@@ -365,19 +365,19 @@ class TSL2561(I2C):
 		return broadband
 
 	def measure(self, property):
-		messurment = Meassurment()
-		messurment.timestamp = datetime.now()
-		messurment.type = property
-		messurment.unit = "lux"
+		measurement = Measurement()
+		measurement.timestamp = datetime.now()
+		measurement.type = property
+		measurement.unit = "lux"
 
-		if messurment.type   == "visible_light":
-			messurment.value  = self.lux()
-		elif messurment.type == "ir_light":
-			messurment.value = self.ir()
-			messurment.unit = "lux_ir"
+		if measurement.type   == "visible_light":
+			measurement.value  = self.lux()
+		elif measurement.type == "ir_light":
+			measurement.value = self.ir()
+			measurement.unit = "lux_ir"
 		else:
 			raise NotImplementedError
-		return messurment
+		return measurement
 
 
 	def measures(self):
@@ -388,7 +388,7 @@ class TSL2561(I2C):
 
 if __name__ == '__main__':
 	tsl2561 = TSL2561()
-	print("Measuers: ")
+	print("Measures: ")
 	print(tsl2561.measures())
 	print(tsl2561.measure("visible_light"))
 	print(tsl2561.measure("ir_light"))

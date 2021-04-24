@@ -6,14 +6,14 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="SS_HardwareController", # Replace with your own username
+    name="GC_hardware",
     version="0.0.1",
     author="Ricardo H. Ramirez-Gonzalez",
     author_email="ricardo@grow.cab",
-    description="A to control hardware from the Raspberry Pi in an uniform way",
+    description="Uniform hardware controller from the Raspberry Pi",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/GrowCab/SS_HardwareController",
+    url="https://github.com/GrowCab/GC_hardware",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
