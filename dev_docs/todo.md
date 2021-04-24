@@ -6,7 +6,7 @@
 
 [x] Automate version management
 
-[ ] Create container class with sensors
+[x] Create container class with sensors
 
 [ ] Add actuator code that turns on/off a relay (more complex interactions not to be solved right now)
 
@@ -14,7 +14,7 @@
 
 [ ] Automate API generation/mapping based on the Open API generator implementation from the backend
 
-[ ] Container class should read from teh database which are the expected sensors (use list above to build them)
+[ ] Container class should read from the database which are the expected sensors (use list above to build them)
 
 [ ] Send measurements from sensors to the databases once per minute
 

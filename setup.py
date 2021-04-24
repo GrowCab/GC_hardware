@@ -20,5 +20,11 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    entry_points={
+        "console_scripts": [
+            "gc_hardware = HardwareController.__main__:main"
+        ]
+    },
+
     python_requires='>=3.6'
 )

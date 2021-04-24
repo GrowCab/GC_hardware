@@ -33,6 +33,8 @@ where GC_hardware is the full or relative path to the project folder.
 
 ## Running the app
 
+Once you have installed it, you can simply run the app by using:
+
 ```bash
-python -m HardwareController
+gc_hardware
 ```

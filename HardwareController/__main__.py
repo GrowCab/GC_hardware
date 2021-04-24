@@ -15,13 +15,18 @@ class Chamber:
 
 
 @click.command()
-@click.option('--api_endpoint', default='http://localhost:5000/api')
-@click.option('--chamber_id', default=1)
-def main(api_endpoint, chamber_id):
+@click.option('--api_endpoint', default='http://localhost:5000/api', show_default=True)
+@click.option('--chamber_id', default=1, show_default=True)
+@click.option('--measure_frequency', default=60, show_default=True)
+@click.version_option()
+def main(api_endpoint, chamber_id, measure_frequency, version):
     print(f"GC_hardware - {VERSION}")
+
+    if version:
+        return
+
     print("Press CTRL-C to terminate")
     running = True
-
     try:
         chamber = Chamber(chamber_id) # TODO: Collect *chamber_id* configuration
         while running:
@@ -31,7 +36,7 @@ def main(api_endpoint, chamber_id):
                     measurement = s.measure(measure_type)
                     print(f"{measure_type}: {measurement.value:.2f}")
             print("")
-            sleep(2) # 10s
+            sleep(measure_frequency) # 10s
     except KeyboardInterrupt:
         print("Terminating...")
 
