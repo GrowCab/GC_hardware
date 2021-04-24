@@ -4,7 +4,7 @@
 
 [x] Create a main entry-point for the daemon
 
-[ ] Automate version management
+[x] Automate version management
 
 [ ] Create container class with sensors
 

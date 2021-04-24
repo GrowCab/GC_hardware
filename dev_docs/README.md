@@ -4,6 +4,14 @@
 
 The version is placed in both the [`setup.py`](../setup.py) file and in the [`HardwareController/__init__.py`](../HardwareController/__init__.py), both of these files can be automatically updated using [bump2version](https://pypi.org/project/bump2version/)
 
+Now for example, to update the version's patch number you can:
+
+```bash
+bump2version patch
+```
+
+This will modify both files increasing the patch version number by one, for more information, please read the bump2version docs.
+
 
 ## Installation
 
@@ -22,7 +30,8 @@ pip install GC_hardware
 where GC_hardware is the full or relative path to the project folder.
 
 
-Finally, to execute the daemon:
+
+## Running the app
 
 ```bash
 python -m HardwareController
