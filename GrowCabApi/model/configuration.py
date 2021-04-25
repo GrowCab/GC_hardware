@@ -81,10 +81,10 @@ class Configuration(ModelNormal):
         lazy_import()
         return {
             'description': (str,),  # noqa: E501
-            'id': (int,),  # noqa: E501
-            'expected_measure': ([ExpectedMeasure],),  # noqa: E501
             'timestamp': (datetime, none_type,),  # noqa: E501
+            'id': (int,),  # noqa: E501
             'chamber_id': (int, none_type,),  # noqa: E501
+            'expected_measure': ([ExpectedMeasure],),  # noqa: E501
         }
 
     @cached_property
@@ -94,10 +94,10 @@ class Configuration(ModelNormal):
 
     attribute_map = {
         'description': 'description',  # noqa: E501
-        'id': 'id',  # noqa: E501
-        'expected_measure': 'expected_measure',  # noqa: E501
         'timestamp': 'timestamp',  # noqa: E501
+        'id': 'id',  # noqa: E501
         'chamber_id': 'chamber_id',  # noqa: E501
+        'expected_measure': 'expected_measure',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -149,10 +149,10 @@ class Configuration(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            id (int): [optional]  # noqa: E501
-            expected_measure ([ExpectedMeasure]): [optional]  # noqa: E501
             timestamp (datetime, none_type): [optional]  # noqa: E501
+            id (int): [optional]  # noqa: E501
             chamber_id (int, none_type): [optional]  # noqa: E501
+            expected_measure ([ExpectedMeasure]): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

@@ -96,24 +96,24 @@ with GrowCabApi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = configurations_api.ConfigurationsApi(api_client)
     configuration1 = Configuration1(
+        description="description_example",
+        timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
         id=1,
+        chamber_id=1,
         expected_measure=[
             ExpectedMeasure(
+                configuration_id=1,
+                id=1,
+                expected_value=3.14,
+                end_hour=1,
+                end_minute=1,
                 unit=Unit(
                     description="description_example",
                     id=1,
                 ),
-                id=1,
-                configuration_id=1,
-                end_hour=1,
                 unit_id=1,
-                end_minute=1,
-                expected_value=3.14,
             ),
         ],
-        description="description_example",
-        timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
-        chamber_id=1,
     ) # Configuration1 | 
 
     # example passing only required values which don't have defaults set

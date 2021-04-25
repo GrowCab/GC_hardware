@@ -12,9 +12,9 @@
 
 [ ] Add actuator code that turns on/off a relay (more complex interactions not to be solved right now)
 
-[ ] Make a file with the hash mappings between the classes and the IDs of sensors and units in the DB
+[ ] Create `class` => `Sensor` mappings on the DB and use these to load the correct sensors, the results are currently available in the `get_chamber` API call
 
-[ ] Container class should read from the database which are the expected sensors (use list above to build them)
+[ ] Use the list of API `Sensor` to instantiate the Chamber sensor objects
 
 [ ] Send measurements from sensors to the databases once per minute
 

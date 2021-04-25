@@ -80,10 +80,10 @@ class Sensor1(ModelNormal):
         """
         lazy_import()
         return {
+            'timestamp': (datetime, none_type,),  # noqa: E501
+            'chamber': (Chamber,),  # noqa: E501
             'description': (str,),  # noqa: E501
             'id': (int,),  # noqa: E501
-            'chamber': (Chamber,),  # noqa: E501
-            'timestamp': (datetime, none_type,),  # noqa: E501
         }
 
     @cached_property
@@ -92,10 +92,10 @@ class Sensor1(ModelNormal):
 
 
     attribute_map = {
+        'timestamp': 'timestamp',  # noqa: E501
+        'chamber': 'chamber',  # noqa: E501
         'description': 'description',  # noqa: E501
         'id': 'id',  # noqa: E501
-        'chamber': 'chamber',  # noqa: E501
-        'timestamp': 'timestamp',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -144,10 +144,10 @@ class Sensor1(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            timestamp (datetime, none_type): [optional]  # noqa: E501
+            chamber (Chamber): [optional]  # noqa: E501
             description (str): [optional]  # noqa: E501
             id (int): [optional]  # noqa: E501
-            chamber (Chamber): [optional]  # noqa: E501
-            timestamp (datetime, none_type): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
