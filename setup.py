@@ -22,7 +22,7 @@ setuptools.setup(
     ],
     entry_points={
         "console_scripts": [
-            "gc_hardware = HardwareController.__main__:main"
+            "gc_hardware = gc_hardware:main"
         ]
     },
 

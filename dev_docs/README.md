@@ -33,8 +33,29 @@ where GC_hardware is the full or relative path to the project folder.
 
 ## Running the app
 
-Once you have installed it, you can simply run the app by using:
+Once you have installed it, you can simply run the app by using, the `api_host` parameter defaults to `http://localhost` so will likely need to be adjusted:
 
 ```bash
-gc_hardware
+gc_hardware --api_host http://<gc_database_host>:<gc_database_port>
+```
+
+
+For a list of all available parameters and their default values, you can use:
+
+```bash
+gc_hardware --help
+```
+
+## Generate/Update the API using the OpenAPI spec
+
+Run the following command on the main project directory (GC_hardware), to generate a python package mapping the OpenAPI spec to a python library.
+
+```bash
+java -Dcolor -jar openapi-generator-cli.jar generate -i http://gc_database:5000/doc/openapi.json -g python --additional-properties=generateSourceCodeOnly=true --package-name GrowCabApi
+```
+
+The command requires the `openapi-generator-cli.jar` which can be downloaded using:
+
+```bash
+wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.1.0/openapi-generator-cli-5.1.0.jar -O openapi-generator-cli.jar
 ```

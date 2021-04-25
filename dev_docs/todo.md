@@ -8,11 +8,11 @@
 
 [x] Create container class with sensors
 
+[x] Automate API generation/mapping based on the Open API generator implementation from the backend
+
 [ ] Add actuator code that turns on/off a relay (more complex interactions not to be solved right now)
 
 [ ] Make a file with the hash mappings between the classes and the IDs of sensors and units in the DB
-
-[ ] Automate API generation/mapping based on the Open API generator implementation from the backend
 
 [ ] Container class should read from the database which are the expected sensors (use list above to build them)
 
