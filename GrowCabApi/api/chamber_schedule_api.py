@@ -161,8 +161,8 @@ class ChamberScheduleApi(object):
 
         def __get_chamber_schedule_unit(
             self,
-            unit_id,
             chamber_id,
+            unit_id,
             **kwargs
         ):
             """get_chamber_schedule_unit  # noqa: E501
@@ -170,12 +170,12 @@ class ChamberScheduleApi(object):
             This method makes a synchronous HTTP request by default. To make an
             asynchronous HTTP request, please pass async_req=True
 
-            >>> thread = api.get_chamber_schedule_unit(unit_id, chamber_id, async_req=True)
+            >>> thread = api.get_chamber_schedule_unit(chamber_id, unit_id, async_req=True)
             >>> result = thread.get()
 
             Args:
-                unit_id (int):
                 chamber_id (int):
+                unit_id (int):
 
             Keyword Args:
                 _return_http_data_only (bool): response data without head status
@@ -222,10 +222,10 @@ class ChamberScheduleApi(object):
                 '_check_return_type', True
             )
             kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['unit_id'] = \
-                unit_id
             kwargs['chamber_id'] = \
                 chamber_id
+            kwargs['unit_id'] = \
+                unit_id
             return self.call_with_http_info(**kwargs)
 
         self.get_chamber_schedule_unit = _Endpoint(
@@ -239,29 +239,29 @@ class ChamberScheduleApi(object):
             },
             params_map={
                 'all': [
-                    'unit_id',
                     'chamber_id',
+                    'unit_id',
                 ],
                 'required': [
-                    'unit_id',
                     'chamber_id',
+                    'unit_id',
                 ],
                 'nullable': [
                 ],
                 'enum': [
                 ],
                 'validation': [
-                    'unit_id',
                     'chamber_id',
+                    'unit_id',
                 ]
             },
             root_map={
                 'validations': {
-                    ('unit_id',): {
+                    ('chamber_id',): {
 
                         'inclusive_minimum': 0,
                     },
-                    ('chamber_id',): {
+                    ('unit_id',): {
 
                         'inclusive_minimum': 0,
                     },
@@ -269,18 +269,18 @@ class ChamberScheduleApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
-                    'unit_id':
-                        (int,),
                     'chamber_id':
+                        (int,),
+                    'unit_id':
                         (int,),
                 },
                 'attribute_map': {
-                    'unit_id': 'unit_id',
                     'chamber_id': 'chamber_id',
+                    'unit_id': 'unit_id',
                 },
                 'location_map': {
-                    'unit_id': 'path',
                     'chamber_id': 'path',
+                    'unit_id': 'path',
                 },
                 'collection_format_map': {
                 }
