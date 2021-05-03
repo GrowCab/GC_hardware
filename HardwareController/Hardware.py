@@ -16,15 +16,14 @@ class Sensor(ABC):
 	def can_measure(self, property):
 		return property in self.measures()
 
+
 class Actuator(ABC):
 
 	@abstractmethod
 	def controls(self):
 		pass
 
-
-
-class Meassurment():
+class Measurement():
 	__slots__ = 'unit', 'value', 'type', 'timestamp'
 
 	def __str__(self):

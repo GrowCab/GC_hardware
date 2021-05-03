@@ -1,5 +1,5 @@
-from Hardware  import Sensor, Meassurment
-from I2C_tools import I2C
+from .Hardware  import Sensor, Measurement
+from .I2C_tools import I2C
 
 from smbus2 import SMBus
 import bme280
@@ -16,21 +16,21 @@ class BME280(I2C):
 	def measure(self, property):
 		data = bme280.sample(self.bus, self.address, self.calibration)
 		#print(data.id)
-		messurment = Meassurment()
-		messurment.timestamp = data.timestamp
-		messurment.type = property
-		if messurment.type   == "temperature":
-			messurment.value = data.temperature
-			messurment.unit  = "C"
-		elif messurment.type == "pressure":
-			messurment.value = data.pressure
-			messurment.unit  = "Bar"
-		elif messurment.type == "humidity":
-			messurment.value = data.humidity
-			messurment.unit  = "%"
+		measurement = Measurement()
+		measurement.timestamp = data.timestamp
+		measurement.type = property
+		if measurement.type   == "temperature":
+			measurement.value = data.temperature
+			measurement.unit  = "C"
+		elif measurement.type == "pressure":
+			measurement.value = data.pressure
+			measurement.unit  = "Bar"
+		elif measurement.type == "humidity":
+			measurement.value = data.humidity
+			measurement.unit  = "%"
 		else:
 			raise NotImplementedError
-		return messurment
+		return measurement
 
 	def measures(self):
 		return ["temperature", "pressure", "humidity"]
@@ -38,7 +38,7 @@ class BME280(I2C):
 
 if __name__ == '__main__':
 	bme = BME280()
-	print("Measuers: ")
+	print("Measures: ")
 	print(bme.measures())
 	print(bme.measure("temperature"))
 	print(bme.measure("humidity"))

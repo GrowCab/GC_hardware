@@ -1,3 +1,5 @@
 smbus2
-RPi.bme280
 RPi.GPIO
+click
+RPi.bme280
+urllib3

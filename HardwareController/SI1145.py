@@ -22,7 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from Hardware  import Sensor, Meassurment
+from Hardware  import Sensor, Measurement
 from I2C_tools import I2C
 from smbus2 import SMBus
 import time
