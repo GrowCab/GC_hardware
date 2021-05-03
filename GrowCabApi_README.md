@@ -70,6 +70,8 @@ Class | Method | HTTP request | Description
 *ChambersApi* | [**get_chambers**](GrowCabApi/docs/ChambersApi.md#get_chambers) | **GET** /api/chambers | Get the list of configurations
 *ConfigurationsApi* | [**get_configurations**](GrowCabApi/docs/ConfigurationsApi.md#get_configurations) | **GET** /api/configurations | Get the list of configurations
 *ConfigurationsApi* | [**put_configuration**](GrowCabApi/docs/ConfigurationsApi.md#put_configuration) | **PUT** /api/configurations | Stores a new configuration
+*MeasureGroupApi* | [**get_latest_measure_group**](GrowCabApi/docs/MeasureGroupApi.md#get_latest_measure_group) | **GET** /api/measure_group/{chamber_id} | 
+*MeasureGroupApi* | [**put_latest_measure_group**](GrowCabApi/docs/MeasureGroupApi.md#put_latest_measure_group) | **PUT** /api/measure_group | 
 *SensorApi* | [**delete_sensor**](GrowCabApi/docs/SensorApi.md#delete_sensor) | **DELETE** /api/sensor/{sensor_id} | 
 *SensorApi* | [**get_sensor**](GrowCabApi/docs/SensorApi.md#get_sensor) | **GET** /api/sensor/{sensor_id} | 
 *SensorApi* | [**patch_sensor**](GrowCabApi/docs/SensorApi.md#patch_sensor) | **PATCH** /api/sensor/{sensor_id} | 
@@ -79,15 +81,23 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [Actuator](GrowCabApi/docs/Actuator.md)
+ - [ActuatorMeasure](GrowCabApi/docs/ActuatorMeasure.md)
  - [Chamber](GrowCabApi/docs/Chamber.md)
+ - [ChamberActuator](GrowCabApi/docs/ChamberActuator.md)
  - [ChamberSensor](GrowCabApi/docs/ChamberSensor.md)
  - [Configuration](GrowCabApi/docs/Configuration.md)
- - [Configuration1](GrowCabApi/docs/Configuration1.md)
+ - [EditableActuatorMeasure](GrowCabApi/docs/EditableActuatorMeasure.md)
+ - [EditableConfiguration](GrowCabApi/docs/EditableConfiguration.md)
+ - [EditableMeasureGroup](GrowCabApi/docs/EditableMeasureGroup.md)
+ - [EditableSensor](GrowCabApi/docs/EditableSensor.md)
+ - [EditableSensorMeasure](GrowCabApi/docs/EditableSensorMeasure.md)
  - [Error](GrowCabApi/docs/Error.md)
  - [ExpectedMeasure](GrowCabApi/docs/ExpectedMeasure.md)
  - [Measure](GrowCabApi/docs/Measure.md)
+ - [MeasureGroup](GrowCabApi/docs/MeasureGroup.md)
  - [Sensor](GrowCabApi/docs/Sensor.md)
- - [Sensor1](GrowCabApi/docs/Sensor1.md)
+ - [SensorMeasure](GrowCabApi/docs/SensorMeasure.md)
  - [SensorUnit](GrowCabApi/docs/SensorUnit.md)
  - [Unit](GrowCabApi/docs/Unit.md)
 
