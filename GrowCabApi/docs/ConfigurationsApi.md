@@ -70,7 +70,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_configuration**
-> Configuration put_configuration(configuration1)
+> Configuration put_configuration(editable_configuration)
 
 Stores a new configuration
 
@@ -80,7 +80,7 @@ Stores a new configuration
 import time
 import GrowCabApi
 from GrowCabApi.api import configurations_api
-from GrowCabApi.model.configuration1 import Configuration1
+from GrowCabApi.model.editable_configuration import EditableConfiguration
 from GrowCabApi.model.error import Error
 from GrowCabApi.model.configuration import Configuration
 from pprint import pprint
@@ -95,31 +95,28 @@ configuration = GrowCabApi.Configuration(
 with GrowCabApi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = configurations_api.ConfigurationsApi(api_client)
-    configuration1 = Configuration1(
-        description="description_example",
-        timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
-        id=1,
+    editable_configuration = EditableConfiguration(
         chamber_id=1,
+        description="description_example",
         expected_measure=[
             ExpectedMeasure(
-                configuration_id=1,
-                id=1,
-                expected_value=3.14,
-                end_hour=1,
-                end_minute=1,
                 unit=Unit(
                     description="description_example",
                     id=1,
                 ),
                 unit_id=1,
+                id=1,
+                end_minute=1,
+                expected_value=3.14,
+                end_hour=1,
             ),
         ],
-    ) # Configuration1 | 
+    ) # EditableConfiguration | 
 
     # example passing only required values which don't have defaults set
     try:
         # Stores a new configuration
-        api_response = api_instance.put_configuration(configuration1)
+        api_response = api_instance.put_configuration(editable_configuration)
         pprint(api_response)
     except GrowCabApi.ApiException as e:
         print("Exception when calling ConfigurationsApi->put_configuration: %s\n" % e)
@@ -130,7 +127,7 @@ with GrowCabApi.ApiClient() as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **configuration1** | [**Configuration1**](Configuration1.md)|  |
+ **editable_configuration** | [**EditableConfiguration**](EditableConfiguration.md)|  |
 
 ### Return type
 

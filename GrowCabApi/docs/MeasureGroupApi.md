@@ -1,26 +1,26 @@
-# GrowCabApi.SensorsApi
+# GrowCabApi.MeasureGroupApi
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_sensors**](SensorsApi.md#get_sensors) | **GET** /api/sensors | Get the list of sensors
-[**put_sensor**](SensorsApi.md#put_sensor) | **PUT** /api/sensors | Stores a new sensor
+[**get_latest_measure_group**](MeasureGroupApi.md#get_latest_measure_group) | **GET** /api/measure_group/{chamber_id} | 
+[**put_latest_measure_group**](MeasureGroupApi.md#put_latest_measure_group) | **PUT** /api/measure_group | 
 
 
-# **get_sensors**
-> [Sensor] get_sensors()
+# **get_latest_measure_group**
+> MeasureGroup get_latest_measure_group(chamber_id)
 
-Get the list of sensors
+
 
 ### Example
 
 ```python
 import time
 import GrowCabApi
-from GrowCabApi.api import sensors_api
+from GrowCabApi.api import measure_group_api
+from GrowCabApi.model.measure_group import MeasureGroup
 from GrowCabApi.model.error import Error
-from GrowCabApi.model.sensor import Sensor
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
@@ -32,24 +32,27 @@ configuration = GrowCabApi.Configuration(
 # Enter a context with an instance of the API client
 with GrowCabApi.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = sensors_api.SensorsApi(api_client)
+    api_instance = measure_group_api.MeasureGroupApi(api_client)
+    chamber_id = 0 # int | 
 
-    # example, this endpoint has no required or optional parameters
+    # example passing only required values which don't have defaults set
     try:
-        # Get the list of sensors
-        api_response = api_instance.get_sensors()
+        api_response = api_instance.get_latest_measure_group(chamber_id)
         pprint(api_response)
     except GrowCabApi.ApiException as e:
-        print("Exception when calling SensorsApi->get_sensors: %s\n" % e)
+        print("Exception when calling MeasureGroupApi->get_latest_measure_group: %s\n" % e)
 ```
 
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **chamber_id** | **int**|  |
 
 ### Return type
 
-[**[Sensor]**](Sensor.md)
+[**MeasureGroup**](MeasureGroup.md)
 
 ### Authorization
 
@@ -69,22 +72,20 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **put_sensor**
-> Sensor put_sensor(editable_sensor)
+# **put_latest_measure_group**
+> MeasureGroup put_latest_measure_group(editable_measure_group)
 
-Stores a new sensor
 
-Each sensor contains an id, description and insertion timestamp
 
 ### Example
 
 ```python
 import time
 import GrowCabApi
-from GrowCabApi.api import sensors_api
+from GrowCabApi.api import measure_group_api
+from GrowCabApi.model.measure_group import MeasureGroup
 from GrowCabApi.model.error import Error
-from GrowCabApi.model.sensor import Sensor
-from GrowCabApi.model.editable_sensor import EditableSensor
+from GrowCabApi.model.editable_measure_group import EditableMeasureGroup
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
@@ -96,36 +97,29 @@ configuration = GrowCabApi.Configuration(
 # Enter a context with an instance of the API client
 with GrowCabApi.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = sensors_api.SensorsApi(api_client)
-    editable_sensor = EditableSensor(
-        chamber=Chamber(
-            description="description_example",
-            timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
-            chamber_sensor=[
-                ChamberSensor(
-                    sensor_id=1,
-                    sensor=Sensor(
-                        chamber=Chamber(Chamber),
-                        description="description_example",
-                        hardware_classname="hardware_classname_example",
-                        timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
-                    ),
-                ),
-            ],
-            id=1,
-        ),
-        description="description_example",
-        hardware_classname="hardware_classname_example",
-        timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
-    ) # EditableSensor | 
+    api_instance = measure_group_api.MeasureGroupApi(api_client)
+    editable_measure_group = EditableMeasureGroup(
+        sensor_measure=[
+            EditableSensorMeasure(
+                current_value=3.14,
+                chamber_sensor_id=1,
+                sensor_unit_id=1,
+            ),
+        ],
+        actuator_measure=[
+            EditableActuatorMeasure(
+                chamber_actuator_id=1,
+                current_value=1,
+            ),
+        ],
+    ) # EditableMeasureGroup | 
 
     # example passing only required values which don't have defaults set
     try:
-        # Stores a new sensor
-        api_response = api_instance.put_sensor(editable_sensor)
+        api_response = api_instance.put_latest_measure_group(editable_measure_group)
         pprint(api_response)
     except GrowCabApi.ApiException as e:
-        print("Exception when calling SensorsApi->put_sensor: %s\n" % e)
+        print("Exception when calling MeasureGroupApi->put_latest_measure_group: %s\n" % e)
 ```
 
 
@@ -133,11 +127,11 @@ with GrowCabApi.ApiClient() as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **editable_sensor** | [**EditableSensor**](EditableSensor.md)|  |
+ **editable_measure_group** | [**EditableMeasureGroup**](EditableMeasureGroup.md)|  |
 
 ### Return type
 
-[**Sensor**](Sensor.md)
+[**MeasureGroup**](MeasureGroup.md)
 
 ### Authorization
 

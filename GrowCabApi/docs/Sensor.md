@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **description** | **str** |  | 
-**timestamp** | **datetime, none_type** |  | [optional] 
+**hardware_classname** | **str** |  | 
 **chamber** | [**Chamber**](Chamber.md) |  | [optional] 
-**id** | **int** |  | [optional] 
+**timestamp** | **datetime, none_type** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

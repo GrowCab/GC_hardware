@@ -77,9 +77,8 @@ class SensorUnit(ModelNormal):
         """
         lazy_import()
         return {
-            'id': (int,),  # noqa: E501
-            'max': (float, none_type,),  # noqa: E501
             'unit': (Unit,),  # noqa: E501
+            'max': (float, none_type,),  # noqa: E501
             'min': (float, none_type,),  # noqa: E501
         }
 
@@ -89,9 +88,8 @@ class SensorUnit(ModelNormal):
 
 
     attribute_map = {
-        'id': 'id',  # noqa: E501
-        'max': 'max',  # noqa: E501
         'unit': 'unit',  # noqa: E501
+        'max': 'max',  # noqa: E501
         'min': 'min',  # noqa: E501
     }
 
@@ -141,9 +139,8 @@ class SensorUnit(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            id (int): [optional]  # noqa: E501
-            max (float, none_type): [optional]  # noqa: E501
             unit (Unit): [optional]  # noqa: E501
+            max (float, none_type): [optional]  # noqa: E501
             min (float, none_type): [optional]  # noqa: E501
         """
 

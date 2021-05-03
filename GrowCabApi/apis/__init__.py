@@ -17,5 +17,6 @@
 from GrowCabApi.api.chamber_schedule_api import ChamberScheduleApi
 from GrowCabApi.api.chambers_api import ChambersApi
 from GrowCabApi.api.configurations_api import ConfigurationsApi
+from GrowCabApi.api.measure_group_api import MeasureGroupApi
 from GrowCabApi.api.sensor_api import SensorApi
 from GrowCabApi.api.sensors_api import SensorsApi

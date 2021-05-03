@@ -22,7 +22,7 @@ from GrowCabApi.model_utils import (  # noqa: F401
     validate_and_convert_types
 )
 from GrowCabApi.model.configuration import Configuration
-from GrowCabApi.model.configuration1 import Configuration1
+from GrowCabApi.model.editable_configuration import EditableConfiguration
 from GrowCabApi.model.error import Error
 
 
@@ -144,7 +144,7 @@ class ConfigurationsApi(object):
 
         def __put_configuration(
             self,
-            configuration1,
+            editable_configuration,
             **kwargs
         ):
             """Stores a new configuration  # noqa: E501
@@ -152,11 +152,11 @@ class ConfigurationsApi(object):
             This method makes a synchronous HTTP request by default. To make an
             asynchronous HTTP request, please pass async_req=True
 
-            >>> thread = api.put_configuration(configuration1, async_req=True)
+            >>> thread = api.put_configuration(editable_configuration, async_req=True)
             >>> result = thread.get()
 
             Args:
-                configuration1 (Configuration1):
+                editable_configuration (EditableConfiguration):
 
             Keyword Args:
                 _return_http_data_only (bool): response data without head status
@@ -203,8 +203,8 @@ class ConfigurationsApi(object):
                 '_check_return_type', True
             )
             kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['configuration1'] = \
-                configuration1
+            kwargs['editable_configuration'] = \
+                editable_configuration
             return self.call_with_http_info(**kwargs)
 
         self.put_configuration = _Endpoint(
@@ -218,10 +218,10 @@ class ConfigurationsApi(object):
             },
             params_map={
                 'all': [
-                    'configuration1',
+                    'editable_configuration',
                 ],
                 'required': [
-                    'configuration1',
+                    'editable_configuration',
                 ],
                 'nullable': [
                 ],
@@ -236,13 +236,13 @@ class ConfigurationsApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
-                    'configuration1':
-                        (Configuration1,),
+                    'editable_configuration':
+                        (EditableConfiguration,),
                 },
                 'attribute_map': {
                 },
                 'location_map': {
-                    'configuration1': 'body',
+                    'editable_configuration': 'body',
                 },
                 'collection_format_map': {
                 }

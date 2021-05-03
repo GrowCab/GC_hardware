@@ -77,12 +77,12 @@ class Measure(ModelNormal):
         """
         lazy_import()
         return {
+            'sensor_unit_id': (int,),  # noqa: E501
+            'chamber_sensor_id': (int,),  # noqa: E501
             'current_value': (float,),  # noqa: E501
-            'timestamp': (datetime, none_type,),  # noqa: E501
+            'measure_group_id': (int,),  # noqa: E501
             'id': (int,),  # noqa: E501
-            'chamber_sensor_id': (int, none_type,),  # noqa: E501
             'sensor_unit': (SensorUnit,),  # noqa: E501
-            'sensor_unit_id': (int, none_type,),  # noqa: E501
         }
 
     @cached_property
@@ -91,12 +91,12 @@ class Measure(ModelNormal):
 
 
     attribute_map = {
-        'current_value': 'current_value',  # noqa: E501
-        'timestamp': 'timestamp',  # noqa: E501
-        'id': 'id',  # noqa: E501
-        'chamber_sensor_id': 'chamber_sensor_id',  # noqa: E501
-        'sensor_unit': 'sensor_unit',  # noqa: E501
         'sensor_unit_id': 'sensor_unit_id',  # noqa: E501
+        'chamber_sensor_id': 'chamber_sensor_id',  # noqa: E501
+        'current_value': 'current_value',  # noqa: E501
+        'measure_group_id': 'measure_group_id',  # noqa: E501
+        'id': 'id',  # noqa: E501
+        'sensor_unit': 'sensor_unit',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -111,11 +111,14 @@ class Measure(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, current_value, *args, **kwargs):  # noqa: E501
+    def __init__(self, sensor_unit_id, chamber_sensor_id, current_value, measure_group_id, *args, **kwargs):  # noqa: E501
         """Measure - a model defined in OpenAPI
 
         Args:
+            sensor_unit_id (int):
+            chamber_sensor_id (int):
             current_value (float):
+            measure_group_id (int):
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -148,11 +151,8 @@ class Measure(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            timestamp (datetime, none_type): [optional]  # noqa: E501
             id (int): [optional]  # noqa: E501
-            chamber_sensor_id (int, none_type): [optional]  # noqa: E501
             sensor_unit (SensorUnit): [optional]  # noqa: E501
-            sensor_unit_id (int, none_type): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -178,7 +178,10 @@ class Measure(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
+        self.sensor_unit_id = sensor_unit_id
+        self.chamber_sensor_id = chamber_sensor_id
         self.current_value = current_value
+        self.measure_group_id = measure_group_id
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

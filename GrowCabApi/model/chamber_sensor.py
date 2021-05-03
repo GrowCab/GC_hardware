@@ -77,10 +77,8 @@ class ChamberSensor(ModelNormal):
         """
         lazy_import()
         return {
-            'chamber_id': (int, none_type,),  # noqa: E501
             'sensor_id': (int, none_type,),  # noqa: E501
             'sensor': (Sensor,),  # noqa: E501
-            'id': (int,),  # noqa: E501
         }
 
     @cached_property
@@ -89,10 +87,8 @@ class ChamberSensor(ModelNormal):
 
 
     attribute_map = {
-        'chamber_id': 'chamber_id',  # noqa: E501
         'sensor_id': 'sensor_id',  # noqa: E501
         'sensor': 'sensor',  # noqa: E501
-        'id': 'id',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -141,10 +137,8 @@ class ChamberSensor(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            chamber_id (int, none_type): [optional]  # noqa: E501
             sensor_id (int, none_type): [optional]  # noqa: E501
             sensor (Sensor): [optional]  # noqa: E501
-            id (int): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
