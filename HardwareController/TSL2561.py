@@ -379,10 +379,11 @@ class TSL2561(I2C):
 			raise NotImplementedError
 		return measurement
 
-
 	def measures(self):
 		return ["visible_light", "ir_light"]
 
+	def __str__(self):
+		return "TSL2561"
 
 	
 

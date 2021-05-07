@@ -35,6 +35,9 @@ class BME280(I2C):
 	def measures(self):
 		return ["temperature", "pressure", "humidity"]
 
+	def __str__(self):
+		return "BME280"
+
 
 if __name__ == '__main__':
 	bme = BME280()
