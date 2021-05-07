@@ -1,6 +1,9 @@
 import click
 from time import sleep
 from pprint import pprint
+import threading
+import json
+from collections import defaultdict
 from HardwareController import VERSION
 from HardwareController.BME280 import BME280
 from HardwareController.TSL2561 import TSL2561
@@ -8,10 +11,9 @@ import GrowCabApi
 from GrowCabApi.api.chambers_api import ChambersApi
 from GrowCabApi.api.chamber_schedule_api import ChamberScheduleApi
 from GrowCabApi.model.configuration import Configuration
+from GrowCabApi.model.chamber_status import ChamberStatus
 from GrowCabApi.model.error import Error
 from GrowCabApi.model.chamber import Chamber as ChamberModel
-import threading
- 
 
 class_lookup = {
     "BME280": BME280,
@@ -21,7 +23,9 @@ class_lookup = {
 class Chamber:
     def updateSchedule(self):
         print("Updating Schedule")
-        threading.Timer(self.update_configuration_frequency, self.updateSchedule).start()
+        thread = threading.Timer(self.update_configuration_frequency, self.updateSchedule)
+        thread.daemon = True
+        thread.start()
         api_chamber_schedule = ChamberScheduleApi(api_client=self.api_client).get_chamber_schedule(chamber_id=1)
         self.chamber_schedule = api_chamber_schedule
         # TODO: Update actuator states based on the configuration
@@ -69,11 +73,17 @@ def main(api_host, chamber_id, measure_frequency, update_configuration_frequency
         chamber = Chamber(api_client, update_configuration_frequency)
         while running:
             print("Measuring: ")
+            chamber_current_measures = ChamberStatus()
+            chamber_current_measures['data'] = {}
             for s in chamber.sensors:
+                print(f"{s}")
+                chamber_current_measures['data'][str(s)] = {}
                 for measure_type in s.measures():
-                    measurement = s.measure(measure_type)
-                    print(f"{measure_type}: {measurement.value:.2f}")
+                    measurement = s.measure(measure_type).value
+                    chamber_current_measures['data'][str(s)][measure_type] = measurement
             # TODO: Prepare a MeasureGroup for reporting back to DB
+            print(chamber_current_measures)
+            ChambersApi(api_client=api_client).put_chamber_status(chamber_id=1, chamber_status=chamber_current_measures)
             print("")
 
             sleep(measure_frequency)
