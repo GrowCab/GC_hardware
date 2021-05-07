@@ -22,6 +22,7 @@ from GrowCabApi.model_utils import (  # noqa: F401
     validate_and_convert_types
 )
 from GrowCabApi.model.chamber import Chamber
+from GrowCabApi.model.chamber_status import ChamberStatus
 from GrowCabApi.model.error import Error
 from GrowCabApi.model.measure import Measure
 from GrowCabApi.model.sensor_unit import SensorUnit
@@ -627,4 +628,136 @@ class ChambersApi(object):
             },
             api_client=api_client,
             callable=__get_chambers
+        )
+
+        def __put_chamber_status(
+            self,
+            chamber_id,
+            chamber_status,
+            **kwargs
+        ):
+            """put_chamber_status  # noqa: E501
+
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
+
+            >>> thread = api.put_chamber_status(chamber_id, chamber_status, async_req=True)
+            >>> result = thread.get()
+
+            Args:
+                chamber_id (int):
+                chamber_status (ChamberStatus):
+
+            Keyword Args:
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
+
+            Returns:
+                [Measure]
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['chamber_id'] = \
+                chamber_id
+            kwargs['chamber_status'] = \
+                chamber_status
+            return self.call_with_http_info(**kwargs)
+
+        self.put_chamber_status = _Endpoint(
+            settings={
+                'response_type': ([Measure],),
+                'auth': [],
+                'endpoint_path': '/api/chamber_status/{chamber_id}',
+                'operation_id': 'put_chamber_status',
+                'http_method': 'PUT',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'chamber_id',
+                    'chamber_status',
+                ],
+                'required': [
+                    'chamber_id',
+                    'chamber_status',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                    'chamber_id',
+                ]
+            },
+            root_map={
+                'validations': {
+                    ('chamber_id',): {
+
+                        'inclusive_minimum': 0,
+                    },
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'chamber_id':
+                        (int,),
+                    'chamber_status':
+                        (ChamberStatus,),
+                },
+                'attribute_map': {
+                    'chamber_id': 'chamber_id',
+                },
+                'location_map': {
+                    'chamber_id': 'path',
+                    'chamber_status': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [
+                    'application/json'
+                ]
+            },
+            api_client=api_client,
+            callable=__put_chamber_status
         )

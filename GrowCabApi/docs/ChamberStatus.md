@@ -1,13 +1,10 @@
-# Chamber
+# ChamberStatus
 
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**description** | **str** |  | 
-**chamber_sensor** | [**[ChamberSensor]**](ChamberSensor.md) |  | [optional] 
-**timestamp** | **datetime, none_type** |  | [optional] 
-**id** | **int** |  | [optional] 
+**data** | **{str: ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},)}** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -85,8 +85,8 @@ class EditableSensor(ModelNormal):
         return {
             'description': (str,),  # noqa: E501
             'hardware_classname': (str,),  # noqa: E501
-            'chamber': (Chamber,),  # noqa: E501
             'timestamp': (datetime, none_type,),  # noqa: E501
+            'chamber': (Chamber,),  # noqa: E501
         }
 
     @cached_property
@@ -97,8 +97,8 @@ class EditableSensor(ModelNormal):
     attribute_map = {
         'description': 'description',  # noqa: E501
         'hardware_classname': 'hardware_classname',  # noqa: E501
-        'chamber': 'chamber',  # noqa: E501
         'timestamp': 'timestamp',  # noqa: E501
+        'chamber': 'chamber',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -151,8 +151,8 @@ class EditableSensor(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            chamber (Chamber): [optional]  # noqa: E501
             timestamp (datetime, none_type): [optional]  # noqa: E501
+            chamber (Chamber): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

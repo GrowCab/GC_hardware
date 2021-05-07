@@ -96,19 +96,21 @@ with GrowCabApi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = configurations_api.ConfigurationsApi(api_client)
     editable_configuration = EditableConfiguration(
-        chamber_id=1,
         description="description_example",
+        chamber_id=1,
         expected_measure=[
             ExpectedMeasure(
+                end_hour=1,
                 unit=Unit(
+                    hardware_label="hardware_label_example",
                     description="description_example",
+                    label="label_example",
                     id=1,
                 ),
-                unit_id=1,
-                id=1,
-                end_minute=1,
                 expected_value=3.14,
-                end_hour=1,
+                unit_id=1,
+                end_minute=1,
+                id=1,
             ),
         ],
     ) # EditableConfiguration | 

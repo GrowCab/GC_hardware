@@ -14,6 +14,7 @@ from GrowCabApi.model.actuator_measure import ActuatorMeasure
 from GrowCabApi.model.chamber import Chamber
 from GrowCabApi.model.chamber_actuator import ChamberActuator
 from GrowCabApi.model.chamber_sensor import ChamberSensor
+from GrowCabApi.model.chamber_status import ChamberStatus
 from GrowCabApi.model.configuration import Configuration
 from GrowCabApi.model.editable_actuator_measure import EditableActuatorMeasure
 from GrowCabApi.model.editable_configuration import EditableConfiguration

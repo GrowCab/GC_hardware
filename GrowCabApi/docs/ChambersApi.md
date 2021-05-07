@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**get_chamber_status**](ChambersApi.md#get_chamber_status) | **GET** /api/chamber_status/{chamber_id} | 
 [**get_chamber_units**](ChambersApi.md#get_chamber_units) | **GET** /api/chamber_units/{chamber_id} | Get the units available for this chamber
 [**get_chambers**](ChambersApi.md#get_chambers) | **GET** /api/chambers | Get the list of configurations
+[**put_chamber_status**](ChambersApi.md#put_chamber_status) | **PUT** /api/chamber_status/{chamber_id} | 
 
 
 # **get_chamber**
@@ -328,6 +329,78 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+**200** | OK |  -  |
+**0** | Default error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **put_chamber_status**
+> [Measure] put_chamber_status(chamber_id, chamber_status)
+
+
+
+### Example
+
+```python
+import time
+import GrowCabApi
+from GrowCabApi.api import chambers_api
+from GrowCabApi.model.chamber_status import ChamberStatus
+from GrowCabApi.model.measure import Measure
+from GrowCabApi.model.error import Error
+from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = GrowCabApi.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with GrowCabApi.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = chambers_api.ChambersApi(api_client)
+    chamber_id = 0 # int | 
+    chamber_status = ChamberStatus(
+        data={
+            "key": {},
+        },
+    ) # ChamberStatus | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        api_response = api_instance.put_chamber_status(chamber_id, chamber_status)
+        pprint(api_response)
+    except GrowCabApi.ApiException as e:
+        print("Exception when calling ChambersApi->put_chamber_status: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **chamber_id** | **int**|  |
+ **chamber_status** | [**ChamberStatus**](ChamberStatus.md)|  |
+
+### Return type
+
+[**[Measure]**](Measure.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**422** | Unprocessable Entity |  -  |
 **200** | OK |  -  |
 **0** | Default error response |  -  |
 

@@ -72,8 +72,8 @@ class EditableActuatorMeasure(ModelNormal):
                 and the value is attribute type.
         """
         return {
-            'chamber_actuator_id': (int,),  # noqa: E501
             'current_value': (int,),  # noqa: E501
+            'chamber_actuator_id': (int,),  # noqa: E501
         }
 
     @cached_property
@@ -82,8 +82,8 @@ class EditableActuatorMeasure(ModelNormal):
 
 
     attribute_map = {
-        'chamber_actuator_id': 'chamber_actuator_id',  # noqa: E501
         'current_value': 'current_value',  # noqa: E501
+        'chamber_actuator_id': 'chamber_actuator_id',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -98,12 +98,12 @@ class EditableActuatorMeasure(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, chamber_actuator_id, current_value, *args, **kwargs):  # noqa: E501
+    def __init__(self, current_value, chamber_actuator_id, *args, **kwargs):  # noqa: E501
         """EditableActuatorMeasure - a model defined in OpenAPI
 
         Args:
-            chamber_actuator_id (int):
             current_value (int):
+            chamber_actuator_id (int):
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -161,8 +161,8 @@ class EditableActuatorMeasure(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.chamber_actuator_id = chamber_actuator_id
         self.current_value = current_value
+        self.chamber_actuator_id = chamber_actuator_id
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

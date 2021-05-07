@@ -81,8 +81,8 @@ class Chamber(ModelNormal):
         lazy_import()
         return {
             'description': (str,),  # noqa: E501
-            'timestamp': (datetime, none_type,),  # noqa: E501
             'chamber_sensor': ([ChamberSensor],),  # noqa: E501
+            'timestamp': (datetime, none_type,),  # noqa: E501
             'id': (int,),  # noqa: E501
         }
 
@@ -93,8 +93,8 @@ class Chamber(ModelNormal):
 
     attribute_map = {
         'description': 'description',  # noqa: E501
-        'timestamp': 'timestamp',  # noqa: E501
         'chamber_sensor': 'chamber_sensor',  # noqa: E501
+        'timestamp': 'timestamp',  # noqa: E501
         'id': 'id',  # noqa: E501
     }
 
@@ -147,8 +147,8 @@ class Chamber(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            timestamp (datetime, none_type): [optional]  # noqa: E501
             chamber_sensor ([ChamberSensor]): [optional]  # noqa: E501
+            timestamp (datetime, none_type): [optional]  # noqa: E501
             id (int): [optional]  # noqa: E501
         """
 
