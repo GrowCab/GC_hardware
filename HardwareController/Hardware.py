@@ -16,6 +16,13 @@ class Sensor(ABC):
 	def can_measure(self, property):
 		return property in self.measures()
 
+
+class Actuator(ABC):
+
+	@abstractmethod
+	def controls(self):
+		pass
+
 class Measurement():
 	__slots__ = 'unit', 'value', 'type', 'timestamp'
 
