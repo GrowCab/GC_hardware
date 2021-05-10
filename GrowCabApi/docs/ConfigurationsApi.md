@@ -101,16 +101,16 @@ with GrowCabApi.ApiClient() as api_client:
         expected_measure=[
             ExpectedMeasure(
                 end_hour=1,
-                unit=Unit(
-                    hardware_label="hardware_label_example",
-                    description="description_example",
-                    label="label_example",
-                    id=1,
-                ),
-                expected_value=3.14,
-                unit_id=1,
                 end_minute=1,
                 id=1,
+                expected_value=3.14,
+                unit_id=1,
+                unit=Unit(
+                    id=1,
+                    hardware_label="hardware_label_example",
+                    label="label_example",
+                    description="description_example",
+                ),
             ),
         ],
     ) # EditableConfiguration | 

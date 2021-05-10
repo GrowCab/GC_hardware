@@ -164,8 +164,9 @@ with GrowCabApi.ApiClient() as api_client:
     sensor = Sensor(
         description="description_example",
         hardware_classname="hardware_classname_example",
-        timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
         chamber=Chamber(
+            id=1,
+            timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
             chamber_sensor=[
                 ChamberSensor(
                     sensor=Sensor(Sensor),
@@ -173,9 +174,8 @@ with GrowCabApi.ApiClient() as api_client:
                 ),
             ],
             description="description_example",
-            timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
-            id=1,
         ),
+        timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
     ) # Sensor | 
 
     # example passing only required values which don't have defaults set

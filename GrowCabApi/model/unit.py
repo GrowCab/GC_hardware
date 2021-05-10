@@ -58,10 +58,10 @@ class Unit(ModelNormal):
         ('hardware_label',): {
             'max_length': 512,
         },
-        ('description',): {
+        ('label',): {
             'max_length': 512,
         },
-        ('label',): {
+        ('description',): {
             'max_length': 512,
         },
     }
@@ -82,8 +82,8 @@ class Unit(ModelNormal):
         """
         return {
             'hardware_label': (str,),  # noqa: E501
-            'description': (str,),  # noqa: E501
             'label': (str,),  # noqa: E501
+            'description': (str,),  # noqa: E501
             'id': (int,),  # noqa: E501
         }
 
@@ -94,8 +94,8 @@ class Unit(ModelNormal):
 
     attribute_map = {
         'hardware_label': 'hardware_label',  # noqa: E501
-        'description': 'description',  # noqa: E501
         'label': 'label',  # noqa: E501
+        'description': 'description',  # noqa: E501
         'id': 'id',  # noqa: E501
     }
 
@@ -111,13 +111,13 @@ class Unit(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, hardware_label, description, label, *args, **kwargs):  # noqa: E501
+    def __init__(self, hardware_label, label, description, *args, **kwargs):  # noqa: E501
         """Unit - a model defined in OpenAPI
 
         Args:
             hardware_label (str):
-            description (str):
             label (str):
+            description (str):
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -177,8 +177,8 @@ class Unit(ModelNormal):
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
         self.hardware_label = hardware_label
-        self.description = description
         self.label = label
+        self.description = description
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

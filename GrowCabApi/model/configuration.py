@@ -83,8 +83,8 @@ class Configuration(ModelNormal):
             'description': (str,),  # noqa: E501
             'chamber_id': (int,),  # noqa: E501
             'expected_measure': ([ExpectedMeasure],),  # noqa: E501
-            'timestamp': (datetime, none_type,),  # noqa: E501
             'id': (int,),  # noqa: E501
+            'timestamp': (datetime, none_type,),  # noqa: E501
         }
 
     @cached_property
@@ -96,8 +96,8 @@ class Configuration(ModelNormal):
         'description': 'description',  # noqa: E501
         'chamber_id': 'chamber_id',  # noqa: E501
         'expected_measure': 'expected_measure',  # noqa: E501
-        'timestamp': 'timestamp',  # noqa: E501
         'id': 'id',  # noqa: E501
+        'timestamp': 'timestamp',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -151,8 +151,8 @@ class Configuration(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             expected_measure ([ExpectedMeasure]): [optional]  # noqa: E501
-            timestamp (datetime, none_type): [optional]  # noqa: E501
             id (int): [optional]  # noqa: E501
+            timestamp (datetime, none_type): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
