@@ -3,3 +3,4 @@ RPi.GPIO
 click
 RPi.bme280
 urllib3
+python-dateutil

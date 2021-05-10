@@ -15,6 +15,8 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/GrowCab/GC_hardware",
     packages=setuptools.find_packages(),
+    py_modules=["gc_hardware"],
+    install_requires=['Click'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
@@ -22,7 +24,7 @@ setuptools.setup(
     ],
     entry_points={
         "console_scripts": [
-            "gc_hardware = gc_hardware:main"
+            "gc_hardware=gc_hardware:main"
         ]
     },
 
