@@ -1,5 +1,5 @@
 from smbus2 import SMBus
-from .Hardware  import Sensor, Measurement
+from HardwareController.Hardware  import Sensor, Measurement
 from abc import ABC, abstractmethod, abstractproperty
 
 
