@@ -4,8 +4,6 @@ import time                            #calling time to provide delays in progra
   
 class WaterAtomization(Switch):
 	def __init__(self, control_pin):
-		print("in init of WA")
-		super(Switch).__init__()
 		self.control_pin = control_pin
 
 	def controls(self):
