@@ -54,24 +54,45 @@ class Chamber:
         # In case the configuration was not loaded from the DB
         if not self.sensors:
             self.sensors.extend([BME280(), TSL2561()])
-
+        self.current_status = self.collectSensorData()
         self.updateSchedule()
         print("Chamber Setup - Done")
 
         # self.actuators = hardwareActuators()
         # self.registered_sensors = getChamberSensors(self.id)
         # self.registered_actuators = getChamberActuators(self.id)
-    
+    def collectSensorData(self):
+        print("Measuring sensor data")
+        chamber_current_measures = ChamberStatus()
+        chamber_current_measures['data'] = {}
+        for s in self.sensors:
+            chamber_current_measures['data'][str(s)] = {}
+            for measure_type in s.measures():
+                measurement = s.measure(measure_type).value
+                chamber_current_measures['data'][str(s)][measure_type] = measurement
+        return chamber_current_measures
+
+    def saveSensorData(self):
+        try:
+            print(f"Saving data to DB")
+            ChambersApi(api_client=self.api_client).put_chamber_status(chamber_id=1, chamber_status=self.current_status)
+            print (f"Data saved to DB")
+        except (ResponseError, MaxRetryError) as e:
+            print(f"Could not store the Chamber status in the DB", file=sys.stderr)
+            print(f"{e}", file=sys.stderr)
+
+    def updateSensorData(self):
+        self.current_status = self.collectSensorData()
     
 
 
 @click.command()
 @click.option('--api_host', default='http://localhost', show_default=True)
 @click.option('--chamber_id', default=1, show_default=True)
-@click.option('--measure_frequency', default=3, show_default=True)
+@click.option('--save_status_frequency', default=30, show_default=True, help="Save the measured status each X seconds")
 @click.option('--update_configuration_frequency', default=5, show_default=True)
 @click.version_option()
-def main(api_host, chamber_id, measure_frequency, update_configuration_frequency):
+def main(api_host, chamber_id, save_status_frequency, update_configuration_frequency):
     print(f"GC_hardware - {VERSION}")
     print("Press CTRL-C to terminate")
     running = True
@@ -80,33 +101,19 @@ def main(api_host, chamber_id, measure_frequency, update_configuration_frequency
         chamber = Chamber(api_client, update_configuration_frequency)
         time = 0
         while running:
-            if time % measure_frequency == 0:
-                collectSensorData(chamber, api_client)
+            chamber.updateSensorData()
+            if time % save_status_frequency == 0:    
+                pprint(chamber.current_status)
+                chamber.saveSensorData()
             if time % update_configuration_frequency == 0:
                 chamber.updateSchedule()
+                #TODO: Update actuator here, maybe a functin that wraps the two operations "updateChamber"
             sleep(1)
             time += 1
     except KeyboardInterrupt:
         print("Terminating...")
 
-def collectSensorData(chamber, api_client):
-    print("Measuring sensor data")
-    chamber_current_measures = ChamberStatus()
-    chamber_current_measures['data'] = {}
-    for s in chamber.sensors:
-        chamber_current_measures['data'][str(s)] = {}
-        for measure_type in s.measures():
-            measurement = s.measure(measure_type).value
-            chamber_current_measures['data'][str(s)][measure_type] = measurement
-    # TODO: Prepare a MeasureGroup for reporting back to DB
-    pprint(chamber_current_measures['data'])
-    try:
-        print(f"Saving data to DB")
-        ChambersApi(api_client=api_client).put_chamber_status(chamber_id=1, chamber_status=chamber_current_measures)
-        print (f"Data saved to DB")
-    except (ResponseError, MaxRetryError) as e:
-        print(f"Could not store the Chamber status in the DB", file=sys.stderr)
-        print(f"{e}", file=sys.stderr)
+
 
 
 if __name__ == "__main__":
