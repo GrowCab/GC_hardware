@@ -1,6 +1,7 @@
 import click
 from time import sleep
-from pprint import pprint
+from pprint import pp, pprint
+from datetime import datetime
 import sys
 from urllib3.exceptions import MaxRetryError, ResponseError
 from HardwareController import VERSION
@@ -63,7 +64,7 @@ class Chamber:
         # self.registered_actuators = getChamberActuators(self.id)
     def collectSensorData(self):
         print("Measuring sensor data")
-        chamber_current_measures = ChamberStatus()
+        chamber_current_measures = ChamberStatus() #The type must be ChamberStatus to be compatible with the backend API. 
         chamber_current_measures['data'] = {}
         for s in self.sensors:
             chamber_current_measures['data'][str(s)] = {}
@@ -83,11 +84,25 @@ class Chamber:
 
     def updateSensorData(self):
         self.current_status = self.collectSensorData()
+
+    def currentExpectedMeassures(self):
+        now = datetime.now()
+        hour = now.hour
+        minute = now.minute
+        print(f'{hour}:{minute}')
+        pprint(self.chamber_schedule.get("expected_measure"))
+        # self.chamber_schedule:
+        for em in self.chamber_schedule.get("expected_measure"):
+            #Here we need to get which is the current expected value
+            pass
+            # if em[] <= hour <= 30000:
+            #     pprint(em)
+            
     
 
 
 @click.command()
-@click.option('--api_host', default='http://localhost', show_default=True)
+@click.option('--api_host', default='http://localhost:5000', show_default=True)
 @click.option('--chamber_id', default=1, show_default=True)
 @click.option('--save_status_frequency', default=30, show_default=True, help="Save the measured status each X seconds")
 @click.option('--update_configuration_frequency', default=5, show_default=True)
@@ -107,6 +122,9 @@ def main(api_host, chamber_id, save_status_frequency, update_configuration_frequ
                 chamber.saveSensorData()
             if time % update_configuration_frequency == 0:
                 chamber.updateSchedule()
+                #pprint(chamber.chamber_schedule)
+                chamber.currentExpectedMeassures()
+                #
                 #TODO: Update actuator here, maybe a functin that wraps the two operations "updateChamber"
             sleep(1)
             time += 1
