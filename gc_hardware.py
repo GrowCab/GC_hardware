@@ -17,12 +17,38 @@ class_lookup = {
     "TSL2561": TSL2561
 }
 
+class ChamberSchedule:
+    def __init__(self, chamber_schedule):
+        self.chamber_schedule = chamber_schedule
+
+    def  expected_measures(self):
+        return self.chamber_schedule.get("expected_measure", [])
+
+    def hardware_labels(self):
+        ems = self.expected_measures()
+        labels = map(lambda em: em['unit']['hardware_label'], ems) 
+        return list(set(labels))
+
+    def expected_measures_for(self, unit="temperature"):
+        ems = self.expected_measures()
+        ems = filter(lambda em: em['unit']['hardware_label'] == unit, ems)
+
+        return list(ems)
+
+    def expected_measure_for(self, hour=0, minute=0,  unit="temperature"):
+        ems = self.expected_measures_for(unit=unit)
+        for em in ems: 
+            if (em['end_hour'], em['end_minute']) > (hour, minute): 
+                return em
+        return em
+
 class Chamber:
     def updateSchedule(self):
         print("Updating Schedule")
         try:
             api_chamber_schedule = ChamberScheduleApi(api_client=self.api_client).get_chamber_schedule(chamber_id=1)
-            self.chamber_schedule = api_chamber_schedule
+            self.chamber_schedule = ChamberSchedule(api_chamber_schedule)
+
         except (ResponseError, MaxRetryError) as e:
             print(f"Encountered an issue when getting the chamber configuration", file=sys.stderr)
             print(f"{e}", file=sys.stderr)
@@ -37,9 +63,9 @@ class Chamber:
         print("Chamber Setup - Started")
         try:
             api_chamber = ChambersApi(api_client=api_client).get_chamber(chamber_id=1)
-            api_chamber_schedule = ChamberScheduleApi(api_client=api_client).get_chamber_schedule(chamber_id=1)
             self.chamber_settings = api_chamber
-            self.chamber_schedule = api_chamber_schedule
+            self.updateSchedule()
+
         except (ResponseError, MaxRetryError) as e:
             print(f"Encountered an issue when getting the chamber configuration", file=sys.stderr)
             print(f"{e}", file=sys.stderr)
@@ -85,16 +111,27 @@ class Chamber:
     def updateSensorData(self):
         self.current_status = self.collectSensorData()
 
+
     def currentExpectedMeassures(self):
         now = datetime.now()
         hour = now.hour
         minute = now.minute
         print(f'{hour}:{minute}')
-        pprint(self.chamber_schedule.get("expected_measure"))
+        hardware_labels = self.chamber_schedule.hardware_labels()
+        pprint(hardware_labels)
+
+        for label in hardware_labels:
+            expected = self.chamber_schedule.expected_measure_for(unit= label, hour=hour, minute=minute)
+            print(f"------------------{label}------------------------")
+            pprint(self.chamber_schedule.expected_measures_for(label))
+            print(f"****************{label}****************")
+            pprint(expected)
+        #pprint(self.chamber_schedule.get("expected_measure"))
         # self.chamber_schedule:
-        for em in self.chamber_schedule.get("expected_measure"):
+
+            
             #Here we need to get which is the current expected value
-            pass
+        #    pass
             # if em[] <= hour <= 30000:
             #     pprint(em)
             
