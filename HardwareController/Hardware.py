@@ -24,6 +24,16 @@ class Actuator(ABC):
 	def controls(self):
 		pass
 
+	@property
+	def expected_status(self):
+		return self.__expected_status
+
+	@expected_status.setter
+	def expected_status(self, value):
+		self.__expected_status = value
+
+	
+
 class Switch(Actuator):
 		
 	def on(self):
@@ -50,6 +60,8 @@ class Switch(Actuator):
 
 	def status(self):
 		return self.status
+
+	
 
 class Measurement():
 	__slots__ = 'unit', 'value', 'type', 'timestamp'
