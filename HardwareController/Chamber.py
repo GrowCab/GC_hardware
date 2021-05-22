@@ -1,13 +1,14 @@
+from HardwareController.RangeSwitch import RangeSwitch, SwitchEffect
 from urllib3.exceptions import MaxRetryError, ResponseError
-
+import sys
+from pprint import pp, pprint
 from GrowCabApi.api.chambers_api import ChambersApi
 from GrowCabApi.api.chamber_schedule_api import ChamberScheduleApi
 from GrowCabApi.model.chamber_status import ChamberStatus
-import sys
-
 from HardwareController.BME280 import BME280
 from HardwareController.TSL2561 import TSL2561
-import GrowCabApi
+from HardwareController.ChamberSchedule import ChamberSchedule
+from datetime import datetime
 
 class_lookup = {
     "BME280": BME280,
@@ -57,7 +58,10 @@ class Chamber:
         self.updateSchedule()
         print("Chamber Setup - Done")
 
-        # self.actuators = hardwareActuators()
+        #TODO: Make this dynamic
+        self.actuators = [
+            RangeSwitch(range= 0.5, effect=SwitchEffect.ONOFF, hardware_label="visible_light", control_pin=24 )
+            ]
         # self.registered_sensors = getChamberSensors(self.id)
         # self.registered_actuators = getChamberActuators(self.id)
 
@@ -84,6 +88,28 @@ class Chamber:
     def updateSensorData(self):
         self.current_status = self.collectSensorData()
 
+    def sensorData(self, hardware_label):
+        values = self.current_status['data']
+        pprint("Sensor data")
+        for sensor in values:
+            pprint(f"Sensor: {sensor}")
+            for measure_type in values[sensor]:
+                pprint(measure_type)
+                if measure_type ==  hardware_label:
+                    pprint(f"SAAAME {values[sensor][measure_type]}")
+                    return values[sensor][measure_type]
+        return None
+
+    def updateActuators(self):
+        for a in self.actuators:
+            pprint("ACTUAAATOR")
+            pprint(a)
+            if a.effect == SwitchEffect.ONOFF:
+                value = self.current_expected_measures[a.hardware_label]['expected_value']
+            else:
+                value = self.sensorData(a.hardware_label)
+            pprint(f"New value {value}")
+            a.expected_status = value
 
     def currentExpectedMeassures(self):
         now = datetime.now()
@@ -92,18 +118,12 @@ class Chamber:
         print(f'{hour}:{minute}')
         hardware_labels = self.chamber_schedule.hardware_labels()
         pprint(hardware_labels)
-
+        self.current_expected_measures = {}
         for label in hardware_labels:
             expected = self.chamber_schedule.expected_measure_for(unit= label, hour=hour, minute=minute)
-            print(f"------------------{label}------------------------")
-            pprint(self.chamber_schedule.expected_measures_for(label))
+            # print(f"------------------{label}------------------------")
+            # pprint(self.chamber_schedule.expected_measures_for(label))
             print(f"****************{label}****************")
             pprint(expected)
-        #pprint(self.chamber_schedule.get("expected_measure"))
-        # self.chamber_schedule:
-
-            
-            #Here we need to get which is the current expected value
-        #    pass
-            # if em[] <= hour <= 30000:
-            #     pprint(em)
+            self.current_expected_measures[label] = expected
+        return self.current_expected_measures
