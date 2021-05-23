@@ -60,7 +60,8 @@ class Chamber:
 
         #TODO: Make this dynamic
         self.actuators = [
-            RangeSwitch(range= 0.5, effect=SwitchEffect.ONOFF, hardware_label="visible_light", control_pin=24 )
+            RangeSwitch(range= 0, effect=SwitchEffect.ONOFF, hardware_label="visible_light", control_pin=24, ),
+            RangeSwitch(range= 0.5, effect=SwitchEffect.DECREASE, hardware_label="temperature", control_pin=25 )
             ]
         # self.registered_sensors = getChamberSensors(self.id)
         # self.registered_actuators = getChamberActuators(self.id)
@@ -96,20 +97,19 @@ class Chamber:
             for measure_type in values[sensor]:
                 pprint(measure_type)
                 if measure_type ==  hardware_label:
-                    pprint(f"SAAAME {values[sensor][measure_type]}")
                     return values[sensor][measure_type]
         return None
 
     def updateActuators(self):
         for a in self.actuators:
-            pprint("ACTUAAATOR")
-            pprint(a)
+            expected_value = self.current_expected_measures[a.hardware_label]['expected_value']
+            a.expected_status = expected_value
             if a.effect == SwitchEffect.ONOFF:
-                value = self.current_expected_measures[a.hardware_label]['expected_value']
+                value = expected_value
             else:
                 value = self.sensorData(a.hardware_label)
             pprint(f"New value {value}")
-            a.expected_status = value
+            a.checkAndActuate(value)
 
     def currentExpectedMeassures(self):
         now = datetime.now()

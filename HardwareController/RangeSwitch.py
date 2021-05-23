@@ -35,12 +35,12 @@ class RangeSwitch(Switch):
 	def thresholds(self) -> RangeValues:
 		expected_value = self.expected_status
 		if expected_value == None:
-			return None
+			raise Exception(f"Expected value hasn't been set for {self}")
 		rv = RangeValues()
 		rv.effect = self.effect
 
 		if self.effect == SwitchEffect.ONOFF:
-			rv.trigger = SwitchStatus.ON if expected_value else SwitchStatus.OFF
+			rv.trigger =  SwitchStatus.ON if expected_value else SwitchStatus.OFF
 		if self.effect == SwitchEffect.DECREASE:
 			rv.trigger = expected_value + self.range
 			rv.stop    = expected_value - self.range
@@ -53,7 +53,8 @@ class RangeSwitch(Switch):
 		thresholds = self.thresholds()
 		pprint(thresholds)
 		if self.effect == SwitchEffect.ONOFF:
-			self.turn(thresholds.trigger)
+			value = SwitchStatus.ON if value else SwitchStatus.OFF
+			self.turn(value)
 			return
 		if thresholds.inRange(value):
 			return 	
