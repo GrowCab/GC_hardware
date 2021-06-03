@@ -6,10 +6,11 @@ from abc import ABC, abstractmethod, abstractproperty
 class I2C(Sensor):
 
 	def is_online(self, reconnect=False):
-		if(reconnect):
-			addr = I2C.scan(port=self.port)
-			self.__online = self.address in addr
-		return self.__online
+		return True
+		# if(reconnect):
+		# 	addr = I2C.scan(port=self.port)
+		# 	self.__online = self.address in addr
+		# return self.__online
 
 	def setup(self, address=None, port=None):
 		if address == None or port == None:
@@ -18,6 +19,7 @@ class I2C(Sensor):
 		self.port    = port
 		self.__online = self.is_online(reconnect=True)
 		self.bus   = SMBus(port)
+		#self.bus.pec = 1
 		self.__calibration = self.calibrate()
 
 	@property
