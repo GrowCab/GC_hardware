@@ -1,3 +1,5 @@
+from HardwareController.MultiChannelRelay import SeedMultiChannelRelay
+from HardwareController.SCD30 import SCD30
 from HardwareController.RangeSwitch import RangeSwitch, SwitchEffect
 from urllib3.exceptions import MaxRetryError, ResponseError
 import sys
@@ -12,7 +14,8 @@ from datetime import datetime
 
 class_lookup = {
     "BME280": BME280,
-    "TSL2561": TSL2561
+    "TSL2561": TSL2561, 
+    "SCD30": SCD30
 }
 
 class Chamber:
@@ -53,16 +56,20 @@ class Chamber:
         
         # In case the configuration was not loaded from the DB
         if not self.sensors:
-            self.sensors.extend([BME280(), TSL2561()])
+            self.sensors.extend([SCD30])
         self.current_status = self.collectSensorData()
         self.updateSchedule()
         print("Chamber Setup - Done")
 
         #TODO: Make this dynamic
+        self.mcr = SeedMultiChannelRelay()
         self.actuators = [
-            RangeSwitch(range= 0, effect=SwitchEffect.ONOFF, hardware_label="visible_light", control_pin=24, ),
-            RangeSwitch(range= 0.5, effect=SwitchEffect.DECREASE, hardware_label="temperature", control_pin=25 )
+            RangeSwitch(range= 0,   effect=SwitchEffect.ONOFF, hardware_label="visible_light",  control_pin=1, multi_relay = self.mcr ),
+            RangeSwitch(range= 0.5, effect=SwitchEffect.DECREASE, hardware_label="temperature", control_pin=3, multi_relay = self.mcr ),
+            RangeSwitch(range= 0.5, effect=SwitchEffect.INCREASE, hardware_label="temperature", control_pin=4, multi_relay = self.mcr )
             ]
+
+        #1: Light, 3: cool, 4:heat
         # self.registered_sensors = getChamberSensors(self.id)
         # self.registered_actuators = getChamberActuators(self.id)
 

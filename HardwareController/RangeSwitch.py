@@ -21,11 +21,12 @@ class RangeValues:
 
 class RangeSwitch(Switch):
 	
-	def __init__(self, range: 0.5, effect: SwitchEffect.DECREASE, hardware_label='temperature', control_pin = 24) -> None:
+	def __init__(self, range: 0.5, effect: SwitchEffect.DECREASE, hardware_label='temperature', control_pin = 24, multi_relay=None) -> None:
 		super().__init__()
 		self.range  = range
 		self.effect = effect
 		self.hardware_label   = hardware_label
+		self.multi_relay = multi_relay
 		self.control_pin = control_pin
 		self.expected_status = None
 

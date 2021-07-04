@@ -8,8 +8,8 @@ class I2C(Sensor):
 	def is_online(self, reconnect=False):
 		return True
 		# if(reconnect):
-		# 	addr = I2C.scan(port=self.port)
-		# 	self.__online = self.address in addr
+		#  	addr = I2C.scan(port=self.port)
+		#  	self.__online = self.address in addr
 		# return self.__online
 
 	def setup(self, address=None, port=None):

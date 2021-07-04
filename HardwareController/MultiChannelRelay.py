@@ -42,6 +42,7 @@ class SeedMultiChannelRelay(I2C):
             byte = self.bus.read(self.address, 0)
             print(byte)
             msg.append(byte)
+        return msg
 
     def update_status(self):
         data = [self.CMD_CHANNEL_CTRL, self.channel_state]
