@@ -29,19 +29,41 @@ class SCD30(I2C):
 
     def calibrate(self):
         self.set_measurement_interval(2)
+        self.sensor_measure()
+        
+    def sensor_measure(self):
+        #print(f"Last timestamp: {self.last_sensor_timestamp}")
+        current_time = datetime.now()
+        if self.last_sensor_timestamp != None:
+            diff_time = (current_time - self.last_sensor_timestamp).total_seconds()
+            #print(f"Diff: {diff_time}")
+        else:
+            diff_time = 0
+
+        if diff_time > self.interval:
+            self.last_sensor_meassure = None  
+        
+        if self.last_sensor_meassure != None:
+            return
+
+
+        #self.last_sensor_meassure =
+        #  None
         self.start_periodic_measurement()
-        time.sleep(self.interval)
         while self.last_sensor_meassure == None:
             if self.get_data_ready():
                 self.last_sensor_meassure  = self.read_measurement()
                 self.last_sensor_timestamp = datetime.now()
             else:
                 time.sleep(0.2)
+        self.stop_periodic_measurement()
+
 
     def measure(self, unit) -> Measurement:
-        if self.get_data_ready():
-            self.last_sensor_meassure  = self.read_measurement()
-            self.last_sensor_timestamp = datetime.now()
+        self.sensor_measure()
+        # if self.get_data_ready():
+        #     self.last_sensor_meassure  = self.read_measurement()
+        #     self.last_sensor_timestamp = datetime.now()
         measurement = Measurement()
         measurement.type = unit
         measurement.timestamp = self.last_sensor_timestamp
@@ -346,6 +368,10 @@ if __name__ == '__main__':
     scd30 = SCD30()
     print("Measures")
     print(scd30.measures())
-    print(scd30.measure("temperature"))
-    print(scd30.measure("humidity"))
-    print(scd30.measure("CO2"))
+    i = 0
+    while i < 5:
+        print(scd30.measure("temperature"))
+        print(scd30.measure("humidity"))
+        print(scd30.measure("CO2"))
+        time.sleep(1)
+        i += 1
