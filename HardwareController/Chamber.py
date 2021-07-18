@@ -56,7 +56,8 @@ class Chamber:
         
         # In case the configuration was not loaded from the DB
         if not self.sensors:
-            self.sensors.extend([SCD30])
+            self.sensors.extend([BME280])
+            #self.sensors.extend([SCD30])
         self.current_status = self.collectSensorData()
         self.updateSchedule()
         print("Chamber Setup - Done")

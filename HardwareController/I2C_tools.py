@@ -12,13 +12,14 @@ class I2C(Sensor):
 		#  	self.__online = self.address in addr
 		# return self.__online
 
-	def setup(self, address=None, port=None):
-		if address == None or port == None:
+	def setup(self, address=None, bus=None):
+		if address == None  or bus == None:
 			raise NotImplementedError
 		self.address = address
-		self.port    = port
+		#self.port    = port
 		self.__online = self.is_online(reconnect=True)
-		self.bus   = SMBus(port)
+		#self.bus   = SMBus(port)
+		self.bus = bus
 		#self.bus.pec = 1
 		self.__calibration = self.calibrate()
 

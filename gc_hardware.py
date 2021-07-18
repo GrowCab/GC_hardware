@@ -27,18 +27,22 @@ def main(api_host, chamber_id, save_status_frequency, update_configuration_frequ
         chamber = Chamber(api_client, update_configuration_frequency)
         time = 0
         while running:
+            print("udating sensor data...")
             chamber.updateSensorData()
             if time % save_status_frequency == 0:    
-                #pprint(chamber.current_status)
+                print("Current status....")
+                pprint(chamber.current_status)
                 chamber.saveSensorData()
             if time % update_configuration_frequency == 0:
+                pprint("Updatign schedule....")
                 chamber.updateSchedule()
-                #pprint(chamber.chamber_schedule)
+                pprint(chamber.chamber_schedule)
                 chamber.currentExpectedMeassures()
                 #
+                print("Updating actuators....")
                 chamber.updateActuators()
                 #TODO: Update actuator here, maybe a functin that wraps the two operations "updateChamber"
-            sleep(1)
+            sleep(5)
             time += 1
     except KeyboardInterrupt:
         print("Terminating...")

@@ -6,7 +6,7 @@ import logging
 import smbus2
 import struct
 import time
-
+from smbus2 import SMBus
 from smbus2.smbus2 import i2c_msg
 
 #Based on the code from: https://github.com/RequestForCoffee/scd30
@@ -17,11 +17,11 @@ def interpret_as_float(integer: int):
 class SCD30(I2C):
     """Python I2C driver for the SCD30 CO2 sensor."""
 
-    def __init__(self, address=0x61, port=1, interval=2):
+    def __init__(self, address=0x61,  interval=2, bus=None):
         self.interval = interval
         self.last_sensor_meassure   = None
         self.last_sensor_timestamp  = None
-        self.setup(address=address, port = port)
+        self.setup(address=address, bus=bus)
         #self.address = 0x61
         #self._i2c = smbus2.SMBus(1)
         
@@ -365,13 +365,14 @@ class SCD30(I2C):
         self._send_command(0xD304, num_response_words=0)
 
 if __name__ == '__main__':
-    scd30 = SCD30()
+    port = 1
+    scd30 = SCD30(bus=SMBus(port))
     print("Measures")
     print(scd30.measures())
     i = 0
     while i < 5:
-        print(scd30.measure("temperature"))
-        print(scd30.measure("humidity"))
-        print(scd30.measure("CO2"))
+        for m in scd30.measures():
+            print(scd30.measure(m))
+        
         time.sleep(1)
         i += 1

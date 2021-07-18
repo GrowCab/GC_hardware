@@ -2,7 +2,8 @@
 from time import sleep
 from HardwareController.I2C_tools import I2C
 
-from smbus2 import smbus2, i2c_msg
+from smbus2 import smbus2, i2c_msg, SMBus
+
 from HardwareController.Hardware import Measurement
 
 class SeedMultiChannelRelay(I2C):
@@ -21,8 +22,8 @@ class SeedMultiChannelRelay(I2C):
     CMD_READ_I2C_ADD      =	 int("0x12", 16)
     CMD_READ_FIRMWARE_VER =  int("0x13", 16)
 
-    def __init__(self, port=1, address=0x11) -> None:
-        self.setup(address=address, port=port)
+    def __init__(self, bus=None, address=0x11) -> None:
+        self.setup(address=address, bus=bus)
         self.channel_state = 0
 
     def calibrate(self):
@@ -64,7 +65,9 @@ class SeedMultiChannelRelay(I2C):
 
 
 if __name__ == '__main__':
-    smcr = SeedMultiChannelRelay(port=1, address=0x11)
+    port = 1
+    #scd30 = SCD30(bus=SMBus(port))
+    smcr = SeedMultiChannelRelay(bus=SMBus(port), address=0x11)
     while(True):
         for i in range(1,5):
             smcr.turn_on_channel(i)
