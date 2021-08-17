@@ -29,7 +29,7 @@ class SCD30(I2C):
 
     def calibrate(self):
         self.set_measurement_interval(2)
-        self.sensor_measure()
+        #self.sensor_measure()
         
     def sensor_measure(self):
         #print(f"Last timestamp: {self.last_sensor_timestamp}")
@@ -41,21 +41,19 @@ class SCD30(I2C):
             diff_time = 0
 
         if diff_time > self.interval:
+            #print("Removing meassure cache")
             self.last_sensor_meassure = None  
         
         if self.last_sensor_meassure != None:
+            #print("Returning cached ")
             return
-
-
-        #self.last_sensor_meassure =
-        #  None
         self.start_periodic_measurement()
         while self.last_sensor_meassure == None:
             if self.get_data_ready():
                 self.last_sensor_meassure  = self.read_measurement()
                 self.last_sensor_timestamp = datetime.now()
             else:
-                time.sleep(0.2)
+                time.sleep(1)
         self.stop_periodic_measurement()
 
 

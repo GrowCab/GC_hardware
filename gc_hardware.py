@@ -27,7 +27,7 @@ def main(api_host, chamber_id, save_status_frequency, update_configuration_frequ
         chamber = Chamber(api_client, update_configuration_frequency)
         time = 0
         while running:
-            print("udating sensor data...")
+            #print("udating sensor data...")
             chamber.updateSensorData()
             if time % save_status_frequency == 0:    
                 print("Current status....")
@@ -41,8 +41,8 @@ def main(api_host, chamber_id, save_status_frequency, update_configuration_frequ
                 #
                 print("Updating actuators....")
                 chamber.updateActuators()
-                #TODO: Update actuator here, maybe a functin that wraps the two operations "updateChamber"
-            sleep(5)
+                # TODO: Update actuator here, maybe a functin that wraps the two operations "updateChamber"
+            sleep(1)
             time += 1
     except KeyboardInterrupt:
         print("Terminating...")

@@ -57,10 +57,12 @@ class SeedMultiChannelRelay(I2C):
     def turn_on_channel(self, channel):
         self.channel_state |= (1 << (channel - 1))
         self.update_status()
+        sleep(1)
 
     def turn_off_channel(self, channel):
         self.channel_state &= ~(1 << (channel - 1))
         self.update_status()
+        sleep(1)
 
 
 

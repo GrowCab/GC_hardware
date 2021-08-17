@@ -11,7 +11,7 @@ from HardwareController.BME280 import BME280
 from HardwareController.TSL2561 import TSL2561
 from HardwareController.ChamberSchedule import ChamberSchedule
 from datetime import datetime
-
+from smbus2 import SMBus
 class_lookup = {
     "BME280": BME280,
     "TSL2561": TSL2561, 
@@ -47,23 +47,25 @@ class Chamber:
             print(f"{e}", file=sys.stderr)
 
         self.sensors = []
-
+        port = 1 #This is the port for the bus.
+        bus = SMBus(port)
         # Using the class names from the DB, initialise and store in 'self.sensors' the hardware
         #  sensor instances
         if self.chamber_settings:
             for chamber_sensor in self.chamber_settings['chamber_sensor']:
-                self.sensors.append(class_lookup[chamber_sensor['sensor']['hardware_classname']]())
+                print(chamber_sensor)
+                self.sensors.append(class_lookup[chamber_sensor['sensor']['hardware_classname']](bus=bus))
         
         # In case the configuration was not loaded from the DB
-        if not self.sensors:
-            self.sensors.extend([BME280])
-            #self.sensors.extend([SCD30])
+        #if not self.sensors:
+        #    #self.sensors.extend([BME280])
+        #    self.sensors.extend([SCD30])
         self.current_status = self.collectSensorData()
         self.updateSchedule()
         print("Chamber Setup - Done")
 
         #TODO: Make this dynamic
-        self.mcr = SeedMultiChannelRelay()
+        self.mcr = SeedMultiChannelRelay(bus=bus, address=0x11)
         self.actuators = [
             RangeSwitch(range= 0,   effect=SwitchEffect.ONOFF, hardware_label="visible_light",  control_pin=1, multi_relay = self.mcr ),
             RangeSwitch(range= 0.5, effect=SwitchEffect.DECREASE, hardware_label="temperature", control_pin=3, multi_relay = self.mcr ),
@@ -75,13 +77,17 @@ class Chamber:
         # self.registered_actuators = getChamberActuators(self.id)
 
     def collectSensorData(self):
-        print("Measuring sensor data")
+        #print("Measuring sensor data")
         chamber_current_measures = ChamberStatus() #The type must be ChamberStatus to be compatible with the backend API. 
         chamber_current_measures['data'] = {}
         for s in self.sensors:
+            #pp(s)
             chamber_current_measures['data'][str(s)] = {}
             for measure_type in s.measures():
-                measurement = s.measure(measure_type).value
+                #pp(measure_type)
+                obj = s.measure(measure_type)
+                #pp(obj)
+                measurement = obj.value
                 chamber_current_measures['data'][str(s)][measure_type] = measurement
         return chamber_current_measures
 
@@ -116,7 +122,7 @@ class Chamber:
                 value = expected_value
             else:
                 value = self.sensorData(a.hardware_label)
-            pprint(f"New value {value}")
+            #pprint(f"New value {value} for {a}")
             a.checkAndActuate(value)
 
     def currentExpectedMeassures(self):

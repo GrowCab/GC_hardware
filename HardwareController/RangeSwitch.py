@@ -52,19 +52,23 @@ class RangeSwitch(Switch):
 
 	def checkAndActuate(self, value):
 		thresholds = self.thresholds()
-		pprint(thresholds)
+		#pprint(thresholds)
 		if self.effect == SwitchEffect.ONOFF:
 			value = SwitchStatus.ON if value else SwitchStatus.OFF
+			#print(f"ONOFF: {value}")
 			self.turn(value)
 			return
 		if thresholds.inRange(value):
+			print(f"{value} is in the range")
 			return 	
 		if self.effect == SwitchEffect.INCREASE: 
+			#print(f"INCREASE")
 			if value < thresholds.trigger:
 				self.on()
 			if value > thresholds.stop:
 				self.off()
 		if self.effect == SwitchEffect.DECREASE: 
+			#print(f"DECREASE")
 			if value > thresholds.trigger:
 				self.on()
 			if value < thresholds.stop:
