@@ -362,6 +362,9 @@ class SCD30(I2C):
         """
         self._send_command(0xD304, num_response_words=0)
 
+    def __str__(self):
+        return "SCD30"
+
 if __name__ == '__main__':
     port = 1
     scd30 = SCD30(bus=SMBus(port))

@@ -82,13 +82,14 @@ class Chamber:
         chamber_current_measures['data'] = {}
         for s in self.sensors:
             #pp(s)
-            chamber_current_measures['data'][str(s)] = {}
+            sensor_str = str(s)
+            chamber_current_measures['data'][sensor_str] = {}
             for measure_type in s.measures():
                 #pp(measure_type)
                 obj = s.measure(measure_type)
                 #pp(obj)
                 measurement = obj.value
-                chamber_current_measures['data'][str(s)][measure_type] = measurement
+                chamber_current_measures['data'][sensor_str][measure_type] = measurement
         return chamber_current_measures
 
     def saveSensorData(self):
@@ -129,7 +130,7 @@ class Chamber:
         now = datetime.now()
         hour = now.hour
         minute = now.minute
-        print(f'{hour}:{minute}')
+        #print(f'{hour}:{minute}')
         hardware_labels = self.chamber_schedule.hardware_labels()
         pprint(hardware_labels)
         self.current_expected_measures = {}
@@ -137,7 +138,7 @@ class Chamber:
             expected = self.chamber_schedule.expected_measure_for(unit= label, hour=hour, minute=minute)
             # print(f"------------------{label}------------------------")
             # pprint(self.chamber_schedule.expected_measures_for(label))
-            print(f"****************{label}****************")
-            pprint(expected)
+            #print(f"****************{label}****************")
+            #pprint(expected)
             self.current_expected_measures[label] = expected
         return self.current_expected_measures
