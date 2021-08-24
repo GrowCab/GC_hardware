@@ -7,8 +7,8 @@ import bme280
 class BME280(I2C):
 #Documentation of the sensor: https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf 
 
-	def __init__(self, address=0x76, port=1):
-		self.setup(address=address, port=port)
+	def __init__(self, address=0x76, bus=None):
+		self.setup(address=address, bus=bus)
 
 	def calibrate(self):
 		return bme280.load_calibration_params(self.bus, self.address)

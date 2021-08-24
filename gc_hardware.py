@@ -1,12 +1,15 @@
+from logging import error
 from HardwareController.Chamber import Chamber
 import click
 from time import sleep
 from pprint import pp, pprint
 from datetime import datetime
 from HardwareController import VERSION
+import signal
+import sys
 import GrowCabApi
 
-
+chamber = None
 
 @click.command()
 @click.option('--api_host', default='http://localhost:5000', show_default=True)
@@ -22,6 +25,7 @@ def main(api_host, chamber_id, save_status_frequency, update_configuration_frequ
     try:
         chamber = Chamber(api_client, update_configuration_frequency)
         time = 0
+
         while running:
             #print("updating sensor data...")
             chamber.updateSensorData()
@@ -39,10 +43,26 @@ def main(api_host, chamber_id, save_status_frequency, update_configuration_frequ
                 # TODO: Update actuator here, maybe a function that wraps the two operations "updateChamber"
             sleep(1)
             time += 1
-    except KeyboardInterrupt:
+            
+    except:
         print("Terminating...")
+        if chamber != None:
+            chamber.stopActuators()
+        raise 
 
+def handler(signum, frame):
+    print(f"Terminating ({signum}:{signal.strsignal(signum)})...")
+    if chamber != None:
+        chamber.stopActuators()
+    exit(0  )
 
+signal.signal(signal.SIGABRT, handler)
+signal.signal(signal.SIGILL, handler)
+signal.signal(signal.SIGHUP, handler)
+signal.signal(signal.SIGINT, handler)
+signal.signal(signal.SIGTERM, handler)
+signal.signal(signal.SIGQUIT, handler)
+signal.signal(signal.SIGTERM, handler)
 
 
 if __name__ == "__main__":

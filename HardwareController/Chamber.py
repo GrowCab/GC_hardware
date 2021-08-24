@@ -126,6 +126,10 @@ class Chamber:
             #pprint(f"New value {value} for {a}")
             a.checkAndActuate(value)
 
+    def stopActuators(self):
+        for a in self.actuators:
+            a.off()
+
     def currentExpectedMeasures(self):
         now = datetime.now()
         hour = now.hour
