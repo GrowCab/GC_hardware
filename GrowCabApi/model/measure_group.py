@@ -79,8 +79,8 @@ class MeasureGroup(ModelNormal):
         """
         lazy_import()
         return {
-            'actuator_measure': ([ActuatorMeasure],),  # noqa: E501
             'sensor_measure': ([SensorMeasure],),  # noqa: E501
+            'actuator_measure': ([ActuatorMeasure],),  # noqa: E501
             'timestamp': (datetime, none_type,),  # noqa: E501
         }
 
@@ -90,8 +90,8 @@ class MeasureGroup(ModelNormal):
 
 
     attribute_map = {
-        'actuator_measure': 'actuator_measure',  # noqa: E501
         'sensor_measure': 'sensor_measure',  # noqa: E501
+        'actuator_measure': 'actuator_measure',  # noqa: E501
         'timestamp': 'timestamp',  # noqa: E501
     }
 
@@ -141,8 +141,8 @@ class MeasureGroup(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            actuator_measure ([ActuatorMeasure]): [optional]  # noqa: E501
             sensor_measure ([SensorMeasure]): [optional]  # noqa: E501
+            actuator_measure ([ActuatorMeasure]): [optional]  # noqa: E501
             timestamp (datetime, none_type): [optional]  # noqa: E501
         """
 

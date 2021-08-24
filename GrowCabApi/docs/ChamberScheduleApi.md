@@ -73,7 +73,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_chamber_schedule_unit**
-> [ExpectedMeasure] get_chamber_schedule_unit(chamber_id, unit_id)
+> [ExpectedMeasure] get_chamber_schedule_unit(unit_id, chamber_id)
 
 
 
@@ -97,12 +97,12 @@ configuration = GrowCabApi.Configuration(
 with GrowCabApi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = chamber_schedule_api.ChamberScheduleApi(api_client)
-    chamber_id = 0 # int | 
     unit_id = 0 # int | 
+    chamber_id = 0 # int | 
 
     # example passing only required values which don't have defaults set
     try:
-        api_response = api_instance.get_chamber_schedule_unit(chamber_id, unit_id)
+        api_response = api_instance.get_chamber_schedule_unit(unit_id, chamber_id)
         pprint(api_response)
     except GrowCabApi.ApiException as e:
         print("Exception when calling ChamberScheduleApi->get_chamber_schedule_unit: %s\n" % e)
@@ -113,8 +113,8 @@ with GrowCabApi.ApiClient() as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **chamber_id** | **int**|  |
  **unit_id** | **int**|  |
+ **chamber_id** | **int**|  |
 
 ### Return type
 

@@ -77,8 +77,8 @@ class SensorUnit(ModelNormal):
         """
         lazy_import()
         return {
-            'max': (float,),  # noqa: E501
             'min': (float,),  # noqa: E501
+            'max': (float,),  # noqa: E501
             'unit': (Unit,),  # noqa: E501
         }
 
@@ -88,8 +88,8 @@ class SensorUnit(ModelNormal):
 
 
     attribute_map = {
-        'max': 'max',  # noqa: E501
         'min': 'min',  # noqa: E501
+        'max': 'max',  # noqa: E501
         'unit': 'unit',  # noqa: E501
     }
 
@@ -105,12 +105,12 @@ class SensorUnit(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, max, min, *args, **kwargs):  # noqa: E501
+    def __init__(self, min, max, *args, **kwargs):  # noqa: E501
         """SensorUnit - a model defined in OpenAPI
 
         Args:
-            max (float):
             min (float):
+            max (float):
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -169,8 +169,8 @@ class SensorUnit(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.max = max
         self.min = min
+        self.max = max
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

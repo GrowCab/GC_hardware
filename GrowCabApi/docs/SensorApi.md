@@ -165,15 +165,15 @@ with GrowCabApi.ApiClient() as api_client:
         description="description_example",
         hardware_classname="hardware_classname_example",
         chamber=Chamber(
-            id=1,
-            timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
             chamber_sensor=[
                 ChamberSensor(
-                    sensor=Sensor(Sensor),
                     sensor_id=1,
+                    sensor=Sensor(Sensor),
                 ),
             ],
+            id=1,
             description="description_example",
+            timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
         ),
         timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
     ) # Sensor | 

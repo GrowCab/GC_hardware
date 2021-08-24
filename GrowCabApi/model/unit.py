@@ -84,6 +84,7 @@ class Unit(ModelNormal):
             'hardware_label': (str,),  # noqa: E501
             'label': (str,),  # noqa: E501
             'description': (str,),  # noqa: E501
+            'controllable': (bool, none_type,),  # noqa: E501
             'id': (int,),  # noqa: E501
         }
 
@@ -96,6 +97,7 @@ class Unit(ModelNormal):
         'hardware_label': 'hardware_label',  # noqa: E501
         'label': 'label',  # noqa: E501
         'description': 'description',  # noqa: E501
+        'controllable': 'controllable',  # noqa: E501
         'id': 'id',  # noqa: E501
     }
 
@@ -150,6 +152,7 @@ class Unit(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
+            controllable (bool, none_type): [optional]  # noqa: E501
             id (int): [optional]  # noqa: E501
         """
 
