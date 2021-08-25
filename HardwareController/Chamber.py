@@ -106,11 +106,11 @@ class Chamber:
 
     def sensorData(self, hardware_label):
         values = self.current_status['data']
-        pprint("Sensor data")
+        #pprint("Sensor data")
         for sensor in values:
-            pprint(f"Sensor: {sensor}")
+            #pprint(f"Sensor: {sensor}")
             for measure_type in values[sensor]:
-                pprint(measure_type)
+                #pprint(measure_type)
                 if measure_type ==  hardware_label:
                     return values[sensor][measure_type]
         return None
