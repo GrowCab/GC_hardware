@@ -132,7 +132,7 @@ class Chamber:
         minute = now.minute
         #print(f'{hour}:{minute}')
         hardware_labels = self.chamber_schedule.hardware_labels()
-        pprint(hardware_labels)
+        #pprint(hardware_labels)
         self.current_expected_measures = {}
         for label in hardware_labels:
             expected = self.chamber_schedule.expected_measure_for(unit= label, hour=hour, minute=minute)

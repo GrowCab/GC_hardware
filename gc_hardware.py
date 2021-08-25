@@ -31,14 +31,13 @@ def main(api_host, chamber_id, save_status_frequency, update_configuration_frequ
             chamber.updateSensorData()
             if time % save_status_frequency == 0:    
                 #print("Current status....")
-                #pprint(chamber.current_status)
+                #print(chamber.current_status)
                 chamber.saveSensorData()
             if time % update_configuration_frequency == 0:
-                pprint("Updatign schedule....")
+                print("Updatign schedule....")
                 chamber.updateSchedule()
-                #pprint(chamber.chamber_schedule)
+                pprint(chamber.chamber_schedule)
                 chamber.currentExpectedMeassures()
-                #
                 print("Updating actuators....")
                 chamber.updateActuators()
                 # TODO: Update actuator here, maybe a functin that wraps the two operations "updateChamber"
