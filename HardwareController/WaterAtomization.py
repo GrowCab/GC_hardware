@@ -15,7 +15,7 @@ if __name__ == '__main__':
 	control_pin = 24
 	wa = WaterAtomization(control_pin)
 	i = 5
-	print(wa.controls());
+	print(wa.controls())
 	while i > 0:
 		print(str(i))
 		print("On")

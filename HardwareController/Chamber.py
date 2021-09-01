@@ -126,7 +126,7 @@ class Chamber:
             #pprint(f"New value {value} for {a}")
             a.checkAndActuate(value)
 
-    def currentExpectedMeassures(self):
+    def currentExpectedMeasures(self):
         now = datetime.now()
         hour = now.hour
         minute = now.minute

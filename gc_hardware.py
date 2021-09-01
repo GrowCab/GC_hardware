@@ -8,10 +8,6 @@ import GrowCabApi
 
 
 
-            
-    
-
-
 @click.command()
 @click.option('--api_host', default='http://localhost:5000', show_default=True)
 @click.option('--chamber_id', default=1, show_default=True)
@@ -27,20 +23,20 @@ def main(api_host, chamber_id, save_status_frequency, update_configuration_frequ
         chamber = Chamber(api_client, update_configuration_frequency)
         time = 0
         while running:
-            #print("udating sensor data...")
+            #print("updating sensor data...")
             chamber.updateSensorData()
             if time % save_status_frequency == 0:    
                 #print("Current status....")
                 #print(chamber.current_status)
                 chamber.saveSensorData()
             if time % update_configuration_frequency == 0:
-                print("Updatign schedule....")
+                print("Updating schedule....")
                 chamber.updateSchedule()
                 pprint(chamber.chamber_schedule)
-                chamber.currentExpectedMeassures()
+                chamber.currentExpectedMeasures()
                 print("Updating actuators....")
                 chamber.updateActuators()
-                # TODO: Update actuator here, maybe a functin that wraps the two operations "updateChamber"
+                # TODO: Update actuator here, maybe a function that wraps the two operations "updateChamber"
             sleep(1)
             time += 1
     except KeyboardInterrupt:
