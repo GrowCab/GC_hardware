@@ -4,11 +4,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**hardware_label** | **str** |  | 
-**label** | **str** |  | 
 **description** | **str** |  | 
-**controllable** | **bool, none_type** |  | [optional] 
+**label** | **str** |  | 
+**hardware_label** | **str** |  | 
 **id** | **int** |  | [optional] 
+**controllable** | **bool, none_type** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

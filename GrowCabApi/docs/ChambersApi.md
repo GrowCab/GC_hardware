@@ -143,7 +143,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_chamber_status**
-> [Measure] get_chamber_status(chamber_id)
+> MeasureGroup get_chamber_status(chamber_id)
 
 
 
@@ -153,7 +153,7 @@ No authorization required
 import time
 import GrowCabApi
 from GrowCabApi.api import chambers_api
-from GrowCabApi.model.measure import Measure
+from GrowCabApi.model.measure_group import MeasureGroup
 from GrowCabApi.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
@@ -186,7 +186,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[Measure]**](Measure.md)
+[**MeasureGroup**](MeasureGroup.md)
 
 ### Authorization
 

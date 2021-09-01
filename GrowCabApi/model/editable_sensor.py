@@ -59,10 +59,10 @@ class EditableSensor(ModelNormal):
     }
 
     validations = {
-        ('description',): {
+        ('hardware_classname',): {
             'max_length': 512,
         },
-        ('hardware_classname',): {
+        ('description',): {
             'max_length': 512,
         },
     }
@@ -83,10 +83,10 @@ class EditableSensor(ModelNormal):
         """
         lazy_import()
         return {
-            'description': (str,),  # noqa: E501
             'hardware_classname': (str,),  # noqa: E501
-            'chamber': (Chamber,),  # noqa: E501
+            'description': (str,),  # noqa: E501
             'timestamp': (datetime, none_type,),  # noqa: E501
+            'chamber': (Chamber,),  # noqa: E501
         }
 
     @cached_property
@@ -95,10 +95,10 @@ class EditableSensor(ModelNormal):
 
 
     attribute_map = {
-        'description': 'description',  # noqa: E501
         'hardware_classname': 'hardware_classname',  # noqa: E501
-        'chamber': 'chamber',  # noqa: E501
+        'description': 'description',  # noqa: E501
         'timestamp': 'timestamp',  # noqa: E501
+        'chamber': 'chamber',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -113,12 +113,12 @@ class EditableSensor(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, description, hardware_classname, *args, **kwargs):  # noqa: E501
+    def __init__(self, hardware_classname, description, *args, **kwargs):  # noqa: E501
         """EditableSensor - a model defined in OpenAPI
 
         Args:
-            description (str):
             hardware_classname (str):
+            description (str):
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -151,8 +151,8 @@ class EditableSensor(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            chamber (Chamber): [optional]  # noqa: E501
             timestamp (datetime, none_type): [optional]  # noqa: E501
+            chamber (Chamber): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -178,8 +178,8 @@ class EditableSensor(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.description = description
         self.hardware_classname = hardware_classname
+        self.description = description
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

@@ -25,6 +25,7 @@ from GrowCabApi.model.chamber import Chamber
 from GrowCabApi.model.chamber_status import ChamberStatus
 from GrowCabApi.model.error import Error
 from GrowCabApi.model.measure import Measure
+from GrowCabApi.model.measure_group import MeasureGroup
 from GrowCabApi.model.sensor_unit import SensorUnit
 from GrowCabApi.model.unit import Unit
 
@@ -321,7 +322,7 @@ class ChambersApi(object):
                 async_req (bool): execute request asynchronously
 
             Returns:
-                [Measure]
+                MeasureGroup
                     If the method is called asynchronously, returns the request
                     thread.
             """
@@ -350,7 +351,7 @@ class ChambersApi(object):
 
         self.get_chamber_status = _Endpoint(
             settings={
-                'response_type': ([Measure],),
+                'response_type': (MeasureGroup,),
                 'auth': [],
                 'endpoint_path': '/api/chamber_status/{chamber_id}',
                 'operation_id': 'get_chamber_status',

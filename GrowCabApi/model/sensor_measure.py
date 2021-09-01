@@ -79,11 +79,11 @@ class SensorMeasure(ModelNormal):
         """
         lazy_import()
         return {
-            'sensor_unit_id': (int,),  # noqa: E501
             'current_value': (float,),  # noqa: E501
+            'sensor_unit_id': (int,),  # noqa: E501
             'chamber_sensor_id': (int,),  # noqa: E501
-            'sensor_unit': (SensorUnit,),  # noqa: E501
             'chamber_sensor': (ChamberSensor,),  # noqa: E501
+            'sensor_unit': (SensorUnit,),  # noqa: E501
         }
 
     @cached_property
@@ -92,11 +92,11 @@ class SensorMeasure(ModelNormal):
 
 
     attribute_map = {
-        'sensor_unit_id': 'sensor_unit_id',  # noqa: E501
         'current_value': 'current_value',  # noqa: E501
+        'sensor_unit_id': 'sensor_unit_id',  # noqa: E501
         'chamber_sensor_id': 'chamber_sensor_id',  # noqa: E501
-        'sensor_unit': 'sensor_unit',  # noqa: E501
         'chamber_sensor': 'chamber_sensor',  # noqa: E501
+        'sensor_unit': 'sensor_unit',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -111,12 +111,12 @@ class SensorMeasure(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, sensor_unit_id, current_value, chamber_sensor_id, *args, **kwargs):  # noqa: E501
+    def __init__(self, current_value, sensor_unit_id, chamber_sensor_id, *args, **kwargs):  # noqa: E501
         """SensorMeasure - a model defined in OpenAPI
 
         Args:
-            sensor_unit_id (int):
             current_value (float):
+            sensor_unit_id (int):
             chamber_sensor_id (int):
 
         Keyword Args:
@@ -150,8 +150,8 @@ class SensorMeasure(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            sensor_unit (SensorUnit): [optional]  # noqa: E501
             chamber_sensor (ChamberSensor): [optional]  # noqa: E501
+            sensor_unit (SensorUnit): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -177,8 +177,8 @@ class SensorMeasure(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.sensor_unit_id = sensor_unit_id
         self.current_value = current_value
+        self.sensor_unit_id = sensor_unit_id
         self.chamber_sensor_id = chamber_sensor_id
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
