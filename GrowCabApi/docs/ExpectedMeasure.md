@@ -4,10 +4,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**end_hour** | **int** |  | 
 **expected_value** | **float** |  | 
-**unit_id** | **int** |  | 
+**end_hour** | **int** |  | 
 **end_minute** | **int** |  | 
+**unit_id** | **int** |  | 
 **id** | **int** |  | [optional] 
 **unit** | [**Unit**](Unit.md) |  | [optional] 
 

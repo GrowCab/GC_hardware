@@ -4,8 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**description** | **str** |  | 
 **label** | **str** |  | 
+**description** | **str** |  | 
 **hardware_label** | **str** |  | 
 **id** | **int** |  | [optional] 
 **controllable** | **bool, none_type** |  | [optional] 

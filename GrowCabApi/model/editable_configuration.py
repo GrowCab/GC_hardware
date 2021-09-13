@@ -80,8 +80,8 @@ class EditableConfiguration(ModelNormal):
         """
         lazy_import()
         return {
-            'description': (str,),  # noqa: E501
             'chamber_id': (int,),  # noqa: E501
+            'description': (str,),  # noqa: E501
             'expected_measure': ([ExpectedMeasure],),  # noqa: E501
         }
 
@@ -91,8 +91,8 @@ class EditableConfiguration(ModelNormal):
 
 
     attribute_map = {
-        'description': 'description',  # noqa: E501
         'chamber_id': 'chamber_id',  # noqa: E501
+        'description': 'description',  # noqa: E501
         'expected_measure': 'expected_measure',  # noqa: E501
     }
 
@@ -108,12 +108,12 @@ class EditableConfiguration(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, description, chamber_id, *args, **kwargs):  # noqa: E501
+    def __init__(self, chamber_id, description, *args, **kwargs):  # noqa: E501
         """EditableConfiguration - a model defined in OpenAPI
 
         Args:
-            description (str):
             chamber_id (int):
+            description (str):
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -172,8 +172,8 @@ class EditableConfiguration(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.description = description
         self.chamber_id = chamber_id
+        self.description = description
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

@@ -72,9 +72,9 @@ class Error(ModelNormal):
                 and the value is attribute type.
         """
         return {
-            'errors': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),  # noqa: E501
-            'status': (str,),  # noqa: E501
             'message': (str,),  # noqa: E501
+            'status': (str,),  # noqa: E501
+            'errors': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),  # noqa: E501
             'code': (int,),  # noqa: E501
         }
 
@@ -84,9 +84,9 @@ class Error(ModelNormal):
 
 
     attribute_map = {
-        'errors': 'errors',  # noqa: E501
-        'status': 'status',  # noqa: E501
         'message': 'message',  # noqa: E501
+        'status': 'status',  # noqa: E501
+        'errors': 'errors',  # noqa: E501
         'code': 'code',  # noqa: E501
     }
 
@@ -136,9 +136,9 @@ class Error(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            errors ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): Errors. [optional]  # noqa: E501
-            status (str): Error name. [optional]  # noqa: E501
             message (str): Error message. [optional]  # noqa: E501
+            status (str): Error name. [optional]  # noqa: E501
+            errors ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): Errors. [optional]  # noqa: E501
             code (int): Error code. [optional]  # noqa: E501
         """
 

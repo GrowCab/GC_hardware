@@ -13,6 +13,7 @@ from GrowCabApi.model.actuator import Actuator
 from GrowCabApi.model.actuator_measure import ActuatorMeasure
 from GrowCabApi.model.chamber import Chamber
 from GrowCabApi.model.chamber_actuator import ChamberActuator
+from GrowCabApi.model.chamber_power_status import ChamberPowerStatus
 from GrowCabApi.model.chamber_sensor import ChamberSensor
 from GrowCabApi.model.chamber_status import ChamberStatus
 from GrowCabApi.model.configuration import Configuration
@@ -25,6 +26,7 @@ from GrowCabApi.model.error import Error
 from GrowCabApi.model.expected_measure import ExpectedMeasure
 from GrowCabApi.model.measure import Measure
 from GrowCabApi.model.measure_group import MeasureGroup
+from GrowCabApi.model.pagination_metadata import PaginationMetadata
 from GrowCabApi.model.sensor import Sensor
 from GrowCabApi.model.sensor_measure import SensorMeasure
 from GrowCabApi.model.sensor_unit import SensorUnit

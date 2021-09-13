@@ -77,10 +77,10 @@ class ExpectedMeasure(ModelNormal):
         """
         lazy_import()
         return {
-            'end_hour': (int,),  # noqa: E501
             'expected_value': (float,),  # noqa: E501
-            'unit_id': (int,),  # noqa: E501
+            'end_hour': (int,),  # noqa: E501
             'end_minute': (int,),  # noqa: E501
+            'unit_id': (int,),  # noqa: E501
             'id': (int,),  # noqa: E501
             'unit': (Unit,),  # noqa: E501
         }
@@ -91,10 +91,10 @@ class ExpectedMeasure(ModelNormal):
 
 
     attribute_map = {
-        'end_hour': 'end_hour',  # noqa: E501
         'expected_value': 'expected_value',  # noqa: E501
-        'unit_id': 'unit_id',  # noqa: E501
+        'end_hour': 'end_hour',  # noqa: E501
         'end_minute': 'end_minute',  # noqa: E501
+        'unit_id': 'unit_id',  # noqa: E501
         'id': 'id',  # noqa: E501
         'unit': 'unit',  # noqa: E501
     }
@@ -111,14 +111,14 @@ class ExpectedMeasure(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, end_hour, expected_value, unit_id, end_minute, *args, **kwargs):  # noqa: E501
+    def __init__(self, expected_value, end_hour, end_minute, unit_id, *args, **kwargs):  # noqa: E501
         """ExpectedMeasure - a model defined in OpenAPI
 
         Args:
-            end_hour (int):
             expected_value (float):
-            unit_id (int):
+            end_hour (int):
             end_minute (int):
+            unit_id (int):
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -178,10 +178,10 @@ class ExpectedMeasure(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.end_hour = end_hour
         self.expected_value = expected_value
-        self.unit_id = unit_id
+        self.end_hour = end_hour
         self.end_minute = end_minute
+        self.unit_id = unit_id
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

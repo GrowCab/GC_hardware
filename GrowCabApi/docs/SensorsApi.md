@@ -102,6 +102,9 @@ with GrowCabApi.ApiClient() as api_client:
         hardware_classname="hardware_classname_example",
         description="description_example",
         chamber=Chamber(
+            status="POWER_OFF",
+            description="description_example",
+            timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
             chamber_sensor=[
                 ChamberSensor(
                     sensor_id=1,
@@ -114,8 +117,6 @@ with GrowCabApi.ApiClient() as api_client:
                 ),
             ],
             id=1,
-            description="description_example",
-            timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
         ),
     ) # EditableSensor | 
 

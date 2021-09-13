@@ -2,7 +2,7 @@ from logging import error
 from HardwareController.Chamber import Chamber
 import click
 from time import sleep
-from pprint import pp, pprint
+from pprint import pprint
 from datetime import datetime
 from HardwareController import VERSION
 import signal
