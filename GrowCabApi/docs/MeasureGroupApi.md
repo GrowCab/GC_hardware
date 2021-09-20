@@ -99,17 +99,17 @@ with GrowCabApi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = measure_group_api.MeasureGroupApi(api_client)
     editable_measure_group = EditableMeasureGroup(
-        sensor_measure=[
-            EditableSensorMeasure(
-                current_value=3.14,
-                chamber_sensor_id=1,
-                sensor_unit_id=1,
-            ),
-        ],
         actuator_measure=[
             EditableActuatorMeasure(
-                current_value=1,
                 chamber_actuator_id=1,
+                current_value=1,
+            ),
+        ],
+        sensor_measure=[
+            EditableSensorMeasure(
+                chamber_sensor_id=1,
+                sensor_unit_id=1,
+                current_value=3.14,
             ),
         ],
     ) # EditableMeasureGroup | 

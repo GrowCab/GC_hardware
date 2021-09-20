@@ -97,23 +97,23 @@ with GrowCabApi.ApiClient() as api_client:
     api_instance = configurations_api.ConfigurationsApi(api_client)
     editable_configuration = EditableConfiguration(
         description="description_example",
+        chamber_id=1,
         expected_measure=[
             ExpectedMeasure(
-                id=1,
                 unit=Unit(
-                    id=1,
                     description="description_example",
-                    label="label_example",
+                    id=1,
                     hardware_label="hardware_label_example",
+                    label="label_example",
                     controllable=True,
                 ),
+                end_minute=1,
+                id=1,
                 end_hour=1,
                 expected_value=3.14,
                 unit_id=1,
-                end_minute=1,
             ),
         ],
-        chamber_id=1,
     ) # EditableConfiguration | 
 
     # example passing only required values which don't have defaults set

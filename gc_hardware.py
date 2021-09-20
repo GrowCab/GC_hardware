@@ -21,6 +21,7 @@ def main(api_host, chamber_id, save_status_frequency, update_configuration_frequ
     print(f"GC_hardware - {VERSION}")
     print("Press CTRL-C to terminate")
     running = True
+    chamber = None
     api_client = GrowCabApi.ApiClient(configuration=GrowCabApi.Configuration(host=api_host))
     try:
         chamber = Chamber(api_client, update_configuration_frequency)
@@ -34,11 +35,11 @@ def main(api_host, chamber_id, save_status_frequency, update_configuration_frequ
                 #print(chamber.current_status)
                 chamber.saveSensorData()
             if time % update_configuration_frequency == 0:
-                print("Updating schedule....")
+                #print("Updating schedule....")
                 chamber.updateSchedule()
-                pprint(chamber.chamber_schedule)
+                #pprint(chamber.chamber_schedule)
                 chamber.currentExpectedMeasures()
-                print("Updating actuators....")
+                #print("Updating actuators....")
                 chamber.updateActuators()
                 # TODO: Update actuator here, maybe a function that wraps the two operations "updateChamber"
             sleep(1)

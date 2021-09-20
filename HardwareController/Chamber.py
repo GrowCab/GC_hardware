@@ -20,10 +20,14 @@ class_lookup = {
 
 class Chamber:
     def updateSchedule(self):
-        print("Updating Schedule")
+        #print("Updating Schedule")
         try:
-            api_chamber_schedule = ChamberScheduleApi(api_client=self.api_client).get_chamber_schedule(chamber_id=1)
+            api = ChamberScheduleApi(api_client=self.api_client)
+            api_chamber_schedule = api.get_chamber_schedule(chamber_id=1)
             self.chamber_schedule = ChamberSchedule(api_chamber_schedule)
+            chamber_api = ChambersApi(api_client=self.api_client)
+            pws=chamber_api.get_chamber_power_status(chamber_id=1)
+            pp(pws)
 
         except (ResponseError, MaxRetryError) as e:
             print(f"Encountered an issue when getting the chamber configuration", file=sys.stderr)

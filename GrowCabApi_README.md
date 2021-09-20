@@ -64,11 +64,13 @@ Class | Method | HTTP request | Description
 *ChamberScheduleApi* | [**get_chamber_schedule**](GrowCabApi/docs/ChamberScheduleApi.md#get_chamber_schedule) | **GET** /api/chamber_schedule/{chamber_id} | 
 *ChamberScheduleApi* | [**get_chamber_schedule_unit**](GrowCabApi/docs/ChamberScheduleApi.md#get_chamber_schedule_unit) | **GET** /api/chamber_schedule_unit/{chamber_id}/{unit_id} | 
 *ChambersApi* | [**get_chamber**](GrowCabApi/docs/ChambersApi.md#get_chamber) | **GET** /api/chamber/{chamber_id} | Get the chamber and related objects :param chamber_id: ID of the chamber :return: Returns a Chamber object
+*ChambersApi* | [**get_chamber_power_status**](GrowCabApi/docs/ChambersApi.md#get_chamber_power_status) | **GET** /api/chamber/power/{chamber_id} | 
 *ChambersApi* | [**get_chamber_sensors**](GrowCabApi/docs/ChambersApi.md#get_chamber_sensors) | **GET** /api/chamber_sensors/{chamber_id} | Get the sensors for a chamber :param chamber_id: :return:
 *ChambersApi* | [**get_chamber_status**](GrowCabApi/docs/ChambersApi.md#get_chamber_status) | **GET** /api/chamber_status/{chamber_id} | 
 *ChambersApi* | [**get_chamber_units**](GrowCabApi/docs/ChambersApi.md#get_chamber_units) | **GET** /api/chamber_units/{chamber_id} | Get the units available for this chamber
 *ChambersApi* | [**get_chambers**](GrowCabApi/docs/ChambersApi.md#get_chambers) | **GET** /api/chambers | Get the list of configurations
 *ChambersApi* | [**put_chamber_status**](GrowCabApi/docs/ChambersApi.md#put_chamber_status) | **PUT** /api/chamber_status/{chamber_id} | 
+*ChambersApi* | [**set_chamber_power_status**](GrowCabApi/docs/ChambersApi.md#set_chamber_power_status) | **PUT** /api/chamber/power/{chamber_id} | 
 *ConfigurationsApi* | [**get_configurations**](GrowCabApi/docs/ConfigurationsApi.md#get_configurations) | **GET** /api/configurations | Get the list of configurations
 *ConfigurationsApi* | [**put_configuration**](GrowCabApi/docs/ConfigurationsApi.md#put_configuration) | **PUT** /api/configurations | Stores a new configuration
 *MeasureGroupApi* | [**get_latest_measure_group**](GrowCabApi/docs/MeasureGroupApi.md#get_latest_measure_group) | **GET** /api/measure_group/{chamber_id} | 
@@ -86,6 +88,7 @@ Class | Method | HTTP request | Description
  - [ActuatorMeasure](GrowCabApi/docs/ActuatorMeasure.md)
  - [Chamber](GrowCabApi/docs/Chamber.md)
  - [ChamberActuator](GrowCabApi/docs/ChamberActuator.md)
+ - [ChamberPowerStatus](GrowCabApi/docs/ChamberPowerStatus.md)
  - [ChamberSensor](GrowCabApi/docs/ChamberSensor.md)
  - [ChamberStatus](GrowCabApi/docs/ChamberStatus.md)
  - [Configuration](GrowCabApi/docs/Configuration.md)
