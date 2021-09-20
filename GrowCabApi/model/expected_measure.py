@@ -77,12 +77,12 @@ class ExpectedMeasure(ModelNormal):
         """
         lazy_import()
         return {
-            'expected_value': (float,),  # noqa: E501
-            'end_hour': (int,),  # noqa: E501
             'end_minute': (int,),  # noqa: E501
+            'end_hour': (int,),  # noqa: E501
+            'expected_value': (float,),  # noqa: E501
             'unit_id': (int,),  # noqa: E501
-            'id': (int,),  # noqa: E501
             'unit': (Unit,),  # noqa: E501
+            'id': (int,),  # noqa: E501
         }
 
     @cached_property
@@ -91,12 +91,12 @@ class ExpectedMeasure(ModelNormal):
 
 
     attribute_map = {
-        'expected_value': 'expected_value',  # noqa: E501
-        'end_hour': 'end_hour',  # noqa: E501
         'end_minute': 'end_minute',  # noqa: E501
+        'end_hour': 'end_hour',  # noqa: E501
+        'expected_value': 'expected_value',  # noqa: E501
         'unit_id': 'unit_id',  # noqa: E501
-        'id': 'id',  # noqa: E501
         'unit': 'unit',  # noqa: E501
+        'id': 'id',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -111,13 +111,13 @@ class ExpectedMeasure(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, expected_value, end_hour, end_minute, unit_id, *args, **kwargs):  # noqa: E501
+    def __init__(self, end_minute, end_hour, expected_value, unit_id, *args, **kwargs):  # noqa: E501
         """ExpectedMeasure - a model defined in OpenAPI
 
         Args:
-            expected_value (float):
-            end_hour (int):
             end_minute (int):
+            end_hour (int):
+            expected_value (float):
             unit_id (int):
 
         Keyword Args:
@@ -151,8 +151,8 @@ class ExpectedMeasure(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            id (int): [optional]  # noqa: E501
             unit (Unit): [optional]  # noqa: E501
+            id (int): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -178,9 +178,9 @@ class ExpectedMeasure(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.expected_value = expected_value
-        self.end_hour = end_hour
         self.end_minute = end_minute
+        self.end_hour = end_hour
+        self.expected_value = expected_value
         self.unit_id = unit_id
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \

@@ -107,9 +107,9 @@ with GrowCabApi.ApiClient() as api_client:
         ],
         sensor_measure=[
             EditableSensorMeasure(
+                chamber_sensor_id=1,
                 sensor_unit_id=1,
                 current_value=3.14,
-                chamber_sensor_id=1,
             ),
         ],
     ) # EditableMeasureGroup | 

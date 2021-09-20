@@ -93,6 +93,8 @@ class Chamber(ModelNormal):
             'status': (str, none_type,),  # noqa: E501
             'timestamp': (datetime, none_type,),  # noqa: E501
             'chamber_sensor': ([ChamberSensor],),  # noqa: E501
+            'status': (str, none_type,),  # noqa: E501
+            'timestamp': (datetime, none_type,),  # noqa: E501
             'id': (int,),  # noqa: E501
         }
 
@@ -106,6 +108,8 @@ class Chamber(ModelNormal):
         'status': 'status',  # noqa: E501
         'timestamp': 'timestamp',  # noqa: E501
         'chamber_sensor': 'chamber_sensor',  # noqa: E501
+        'status': 'status',  # noqa: E501
+        'timestamp': 'timestamp',  # noqa: E501
         'id': 'id',  # noqa: E501
     }
 
@@ -161,6 +165,9 @@ class Chamber(ModelNormal):
             status (str, none_type): [optional]  # noqa: E501
             timestamp (datetime, none_type): [optional]  # noqa: E501
             chamber_sensor ([ChamberSensor]): [optional]  # noqa: E501
+            status (str, none_type): [optional]  # noqa: E501
+            timestamp (datetime, none_type): [optional]  # noqa: E501
+
             id (int): [optional]  # noqa: E501
         """
 

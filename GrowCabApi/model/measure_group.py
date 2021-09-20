@@ -80,8 +80,8 @@ class MeasureGroup(ModelNormal):
         lazy_import()
         return {
             'actuator_measure': ([ActuatorMeasure],),  # noqa: E501
-            'timestamp': (datetime, none_type,),  # noqa: E501
             'sensor_measure': ([SensorMeasure],),  # noqa: E501
+            'timestamp': (datetime, none_type,),  # noqa: E501
         }
 
     @cached_property
@@ -142,8 +142,8 @@ class MeasureGroup(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             actuator_measure ([ActuatorMeasure]): [optional]  # noqa: E501
-            timestamp (datetime, none_type): [optional]  # noqa: E501
             sensor_measure ([SensorMeasure]): [optional]  # noqa: E501
+            timestamp (datetime, none_type): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

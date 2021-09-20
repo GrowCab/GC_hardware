@@ -4,8 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**hardware_classname** | **str** |  | 
 **description** | **str** |  | 
+**hardware_classname** | **str** |  | 
 **timestamp** | **datetime, none_type** |  | [optional] 
 **chamber** | [**Chamber**](Chamber.md) |  | [optional] 
 

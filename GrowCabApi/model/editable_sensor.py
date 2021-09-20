@@ -59,10 +59,10 @@ class EditableSensor(ModelNormal):
     }
 
     validations = {
-        ('hardware_classname',): {
+        ('description',): {
             'max_length': 512,
         },
-        ('description',): {
+        ('hardware_classname',): {
             'max_length': 512,
         },
     }
@@ -83,8 +83,8 @@ class EditableSensor(ModelNormal):
         """
         lazy_import()
         return {
-            'hardware_classname': (str,),  # noqa: E501
             'description': (str,),  # noqa: E501
+            'hardware_classname': (str,),  # noqa: E501
             'timestamp': (datetime, none_type,),  # noqa: E501
             'chamber': (Chamber,),  # noqa: E501
         }
@@ -95,8 +95,8 @@ class EditableSensor(ModelNormal):
 
 
     attribute_map = {
-        'hardware_classname': 'hardware_classname',  # noqa: E501
         'description': 'description',  # noqa: E501
+        'hardware_classname': 'hardware_classname',  # noqa: E501
         'timestamp': 'timestamp',  # noqa: E501
         'chamber': 'chamber',  # noqa: E501
     }
@@ -113,12 +113,12 @@ class EditableSensor(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, hardware_classname, description, *args, **kwargs):  # noqa: E501
+    def __init__(self, description, hardware_classname, *args, **kwargs):  # noqa: E501
         """EditableSensor - a model defined in OpenAPI
 
         Args:
-            hardware_classname (str):
             description (str):
+            hardware_classname (str):
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -178,8 +178,8 @@ class EditableSensor(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.hardware_classname = hardware_classname
         self.description = description
+        self.hardware_classname = hardware_classname
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

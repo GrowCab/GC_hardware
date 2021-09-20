@@ -82,8 +82,8 @@ class Configuration(ModelNormal):
         return {
             'description': (str,),  # noqa: E501
             'chamber_id': (int,),  # noqa: E501
-            'expected_measure': ([ExpectedMeasure],),  # noqa: E501
             'timestamp': (datetime, none_type,),  # noqa: E501
+            'expected_measure': ([ExpectedMeasure],),  # noqa: E501
             'id': (int,),  # noqa: E501
         }
 
@@ -95,8 +95,9 @@ class Configuration(ModelNormal):
     attribute_map = {
         'description': 'description',  # noqa: E501
         'chamber_id': 'chamber_id',  # noqa: E501
-        'expected_measure': 'expected_measure',  # noqa: E501
         'timestamp': 'timestamp',  # noqa: E501
+        'expected_measure': 'expected_measure',  # noqa: E501
+
         'id': 'id',  # noqa: E501
     }
 
@@ -150,8 +151,9 @@ class Configuration(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            expected_measure ([ExpectedMeasure]): [optional]  # noqa: E501
             timestamp (datetime, none_type): [optional]  # noqa: E501
+            expected_measure ([ExpectedMeasure]): [optional]  # noqa: E501
+
             id (int): [optional]  # noqa: E501
         """
 
@@ -187,4 +189,4 @@ class Configuration(ModelNormal):
                         self.additional_properties_type is None:
                 # discard variable.
                 continue
-            setattr(self, var_name, var_value)
+k            setattr(self, var_name, var_value)

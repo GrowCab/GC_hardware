@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **sensor_unit_id** | **int** |  | 
 **measure_group_id** | **int** |  | 
 **chamber_sensor_id** | **int** |  | 
+**measure_group_id** | **int** |  | 
 **sensor_unit** | [**SensorUnit**](SensorUnit.md) |  | [optional] 
 **id** | **int** |  | [optional] 
 

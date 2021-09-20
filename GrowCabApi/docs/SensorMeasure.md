@@ -4,8 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**current_value** | **float** |  | 
 **sensor_unit_id** | **int** |  | 
+**current_value** | **float** |  | 
 **chamber_sensor_id** | **int** |  | 
 **sensor_unit** | [**SensorUnit**](SensorUnit.md) |  | [optional] 
 **chamber_sensor** | [**ChamberSensor**](ChamberSensor.md) |  | [optional] 

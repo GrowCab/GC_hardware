@@ -111,7 +111,7 @@ class Measure(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, current_value, sensor_unit_id, measure_group_id, chamber_sensor_id, *args, **kwargs):  # noqa: E501
+    def __init__(self, current_value, sensor_unit_id, chamber_sensor_id, measure_group_id, *args, **kwargs):  # noqa: E501
         """Measure - a model defined in OpenAPI
 
         Args:
@@ -119,6 +119,7 @@ class Measure(ModelNormal):
             sensor_unit_id (int):
             measure_group_id (int):
             chamber_sensor_id (int):
+            measure_group_id (int):
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -182,6 +183,7 @@ class Measure(ModelNormal):
         self.sensor_unit_id = sensor_unit_id
         self.measure_group_id = measure_group_id
         self.chamber_sensor_id = chamber_sensor_id
+        self.measure_group_id = measure_group_id
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

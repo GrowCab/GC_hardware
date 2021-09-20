@@ -4,6 +4,8 @@ from HardwareController.SCD30 import SCD30
 from HardwareController.RangeSwitch import RangeSwitch, SwitchEffect
 from urllib3.exceptions import MaxRetryError, ResponseError
 import sys, os
+import subprocess
+from pprint import pp, pprint
 from GrowCabApi.api.chambers_api import ChambersApi
 from GrowCabApi.api.chamber_schedule_api import ChamberScheduleApi
 from GrowCabApi.model.chamber_status import ChamberStatus
@@ -19,10 +21,44 @@ class_lookup = {
 }
 
 class Chamber:
+
+
+    def shutdown(self):
+        print("Sutdown")
+        pws = ChamberPowerStatus()
+        pws["status"] = "RUNNING"
+        self.chamber_api.set_chamber_power_status(1, pws)
+        self.stopActuators()
+        subprocess.Popen(['shutdown','-h','now'])
+
+    def reboot(self):
+        print("reboot")
+        pws = ChamberPowerStatus()
+        pws["status"] = "RUNNING"
+        self.chamber_api.set_chamber_power_status(1, pws)
+        self.stopActuators()
+        subprocess.Popen(['shutdown','-r','now'])
+
+    def updatePowerStatus(self):
+        
+        pws = self.chamber_api.get_chamber_power_status(chamber_id=1)
+        status = pws['status']
+        pp(pws)
+        if status == "REBOOT":
+            self.reboot()
+        elif status == "POWER_OFF":
+            self.shutdown()
+        else:
+            pws['status'] = "RUNNING"
+            self.chamber_api.set_chamber_power_status(1, pws)
+        #RUNNING POWER_OFF REBOOT
+        
+
     def updateSchedule(self):
-        print("Updating Schedule")
+        #print("Updating Schedule")
         try:
-            api_chamber_schedule = ChamberScheduleApi(api_client=self.api_client).get_chamber_schedule(chamber_id=1)
+            api = ChamberScheduleApi(api_client=self.api_client)
+            api_chamber_schedule = api.get_chamber_schedule(chamber_id=1)
             self.chamber_schedule = ChamberSchedule(api_chamber_schedule)
             self.chamber_power_status = ChambersApi(api_client=self.api_client).get_chamber_power_status(chamber_id=1)
 
@@ -43,6 +79,7 @@ class Chamber:
         self.chamber_settings = None
         self.chamber_schedule = None
         self.update_configuration_frequency = update_configuration_frequency
+        self.chamber_api = ChambersApi(api_client=self.api_client)
         print("Chamber Setup - Started")
         try:
             ChambersApi(api_client=self.api_client).set_chamber_power_status(
