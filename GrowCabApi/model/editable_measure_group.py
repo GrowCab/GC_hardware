@@ -79,8 +79,8 @@ class EditableMeasureGroup(ModelNormal):
         """
         lazy_import()
         return {
-            'actuator_measure': ([EditableActuatorMeasure],),  # noqa: E501
             'sensor_measure': ([EditableSensorMeasure],),  # noqa: E501
+            'actuator_measure': ([EditableActuatorMeasure],),  # noqa: E501
         }
 
     @cached_property
@@ -89,8 +89,8 @@ class EditableMeasureGroup(ModelNormal):
 
 
     attribute_map = {
-        'actuator_measure': 'actuator_measure',  # noqa: E501
         'sensor_measure': 'sensor_measure',  # noqa: E501
+        'actuator_measure': 'actuator_measure',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -139,8 +139,8 @@ class EditableMeasureGroup(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            actuator_measure ([EditableActuatorMeasure]): [optional]  # noqa: E501
             sensor_measure ([EditableSensorMeasure]): [optional]  # noqa: E501
+            actuator_measure ([EditableActuatorMeasure]): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

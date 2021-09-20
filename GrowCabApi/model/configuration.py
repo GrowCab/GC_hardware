@@ -80,11 +80,11 @@ class Configuration(ModelNormal):
         """
         lazy_import()
         return {
-            'description': (str,),  # noqa: E501
             'chamber_id': (int,),  # noqa: E501
+            'description': (str,),  # noqa: E501
             'timestamp': (datetime, none_type,),  # noqa: E501
-            'expected_measure': ([ExpectedMeasure],),  # noqa: E501
             'id': (int,),  # noqa: E501
+            'expected_measure': ([ExpectedMeasure],),  # noqa: E501
         }
 
     @cached_property
@@ -93,12 +93,11 @@ class Configuration(ModelNormal):
 
 
     attribute_map = {
-        'description': 'description',  # noqa: E501
         'chamber_id': 'chamber_id',  # noqa: E501
+        'description': 'description',  # noqa: E501
         'timestamp': 'timestamp',  # noqa: E501
-        'expected_measure': 'expected_measure',  # noqa: E501
-
         'id': 'id',  # noqa: E501
+        'expected_measure': 'expected_measure',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -113,12 +112,12 @@ class Configuration(ModelNormal):
     ])
 
     @convert_js_args_to_python_args
-    def __init__(self, description, chamber_id, *args, **kwargs):  # noqa: E501
+    def __init__(self, chamber_id, description, *args, **kwargs):  # noqa: E501
         """Configuration - a model defined in OpenAPI
 
         Args:
-            description (str):
             chamber_id (int):
+            description (str):
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -152,9 +151,8 @@ class Configuration(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             timestamp (datetime, none_type): [optional]  # noqa: E501
-            expected_measure ([ExpectedMeasure]): [optional]  # noqa: E501
-
             id (int): [optional]  # noqa: E501
+            expected_measure ([ExpectedMeasure]): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -180,8 +178,8 @@ class Configuration(ModelNormal):
         self._configuration = _configuration
         self._visited_composed_classes = _visited_composed_classes + (self.__class__,)
 
-        self.description = description
         self.chamber_id = chamber_id
+        self.description = description
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \
@@ -189,4 +187,4 @@ class Configuration(ModelNormal):
                         self.additional_properties_type is None:
                 # discard variable.
                 continue
-k            setattr(self, var_name, var_value)
+            setattr(self, var_name, var_value)

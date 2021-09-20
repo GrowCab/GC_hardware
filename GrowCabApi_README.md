@@ -101,7 +101,6 @@ Class | Method | HTTP request | Description
  - [ExpectedMeasure](GrowCabApi/docs/ExpectedMeasure.md)
  - [Measure](GrowCabApi/docs/Measure.md)
  - [MeasureGroup](GrowCabApi/docs/MeasureGroup.md)
- - [PaginationMetadata](GrowCabApi/docs/PaginationMetadata.md)
  - [Sensor](GrowCabApi/docs/Sensor.md)
  - [SensorMeasure](GrowCabApi/docs/SensorMeasure.md)
  - [SensorUnit](GrowCabApi/docs/SensorUnit.md)

@@ -26,7 +26,6 @@ from GrowCabApi.model.error import Error
 from GrowCabApi.model.expected_measure import ExpectedMeasure
 from GrowCabApi.model.measure import Measure
 from GrowCabApi.model.measure_group import MeasureGroup
-from GrowCabApi.model.pagination_metadata import PaginationMetadata
 from GrowCabApi.model.sensor import Sensor
 from GrowCabApi.model.sensor_measure import SensorMeasure
 from GrowCabApi.model.sensor_unit import SensorUnit

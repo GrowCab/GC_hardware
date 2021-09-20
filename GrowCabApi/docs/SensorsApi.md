@@ -98,25 +98,25 @@ with GrowCabApi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = sensors_api.SensorsApi(api_client)
     editable_sensor = EditableSensor(
-        description="description_example",
-        hardware_classname="hardware_classname_example",
         timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
+        hardware_classname="hardware_classname_example",
+        description="description_example",
         chamber=Chamber(
-            description="description_example",
+            timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
             chamber_sensor=[
                 ChamberSensor(
                     sensor=Sensor(
-                        description="description_example",
-                        hardware_classname="hardware_classname_example",
                         timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
+                        hardware_classname="hardware_classname_example",
+                        description="description_example",
                         chamber=Chamber(Chamber),
                     ),
                     sensor_id=1,
                 ),
             ],
             status="POWER_OFF",
-            timestamp=dateutil_parser('1970-01-01T00:00:00.00Z'),
             id=1,
+            description="description_example",
         ),
     ) # EditableSensor | 
 
