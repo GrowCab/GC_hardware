@@ -42,8 +42,10 @@ def main(api_host, chamber_id, save_status_frequency, update_configuration_frequ
                 #print("Updating actuators....")
                 chamber.updateActuators()
                 # TODO: Update actuator here, maybe a function that wraps the two operations "updateChamber"
+                chamber.updatePowerStatus()
             sleep(1)
             time += 1
+            
             
     except:
         print("Terminating...")
