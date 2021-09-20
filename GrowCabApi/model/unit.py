@@ -66,6 +66,7 @@ class Unit(ModelNormal):
         },
     }
 
+
     additional_properties_type = None
 
     _nullable = False

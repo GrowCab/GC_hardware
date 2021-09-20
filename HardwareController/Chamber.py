@@ -3,7 +3,7 @@ from HardwareController.MultiChannelRelay import SeedMultiChannelRelay
 from HardwareController.SCD30 import SCD30
 from HardwareController.RangeSwitch import RangeSwitch, SwitchEffect
 from urllib3.exceptions import MaxRetryError, ResponseError
-import sys
+import sys, os
 import subprocess
 from pprint import pp, pprint
 from GrowCabApi.api.chambers_api import ChambersApi
@@ -60,6 +60,13 @@ class Chamber:
             api = ChamberScheduleApi(api_client=self.api_client)
             api_chamber_schedule = api.get_chamber_schedule(chamber_id=1)
             self.chamber_schedule = ChamberSchedule(api_chamber_schedule)
+            self.chamber_power_status = ChambersApi(api_client=self.api_client).get_chamber_power_status(chamber_id=1)
+
+            if self.chamber_power_status['status'] == "POWER_OFF":
+                os.system('sudo shutdown now')
+            if self.chamber_power_status['status'] == "REBOOT":
+                os.system('sudo reboot')
+
 
         except (ResponseError, MaxRetryError) as e:
             print(f"Encountered an issue when getting the chamber configuration", file=sys.stderr)
@@ -75,7 +82,11 @@ class Chamber:
         self.chamber_api = ChambersApi(api_client=self.api_client)
         print("Chamber Setup - Started")
         try:
-            api_chamber = self.chamber_api.get_chamber(chamber_id=1)
+            ChambersApi(api_client=self.api_client).set_chamber_power_status(
+                chamber_id=1, 
+                chamber_power_status=ChamberPowerStatus(status="RUNNING")
+                )
+            api_chamber = ChambersApi(api_client=api_client).get_chamber(chamber_id=1)
             self.chamber_settings = api_chamber
             self.updateSchedule()
 

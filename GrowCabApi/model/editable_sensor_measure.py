@@ -167,6 +167,7 @@ class EditableSensorMeasure(ModelNormal):
         self.chamber_sensor_id = chamber_sensor_id
         self.sensor_unit_id = sensor_unit_id
         self.current_value = current_value
+
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
                         self._configuration is not None and \

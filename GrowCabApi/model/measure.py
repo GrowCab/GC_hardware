@@ -79,8 +79,8 @@ class Measure(ModelNormal):
         return {
             'current_value': (float,),  # noqa: E501
             'sensor_unit_id': (int,),  # noqa: E501
-            'chamber_sensor_id': (int,),  # noqa: E501
             'measure_group_id': (int,),  # noqa: E501
+            'chamber_sensor_id': (int,),  # noqa: E501
             'sensor_unit': (SensorUnit,),  # noqa: E501
             'id': (int,),  # noqa: E501
         }
@@ -93,8 +93,8 @@ class Measure(ModelNormal):
     attribute_map = {
         'current_value': 'current_value',  # noqa: E501
         'sensor_unit_id': 'sensor_unit_id',  # noqa: E501
-        'chamber_sensor_id': 'chamber_sensor_id',  # noqa: E501
         'measure_group_id': 'measure_group_id',  # noqa: E501
+        'chamber_sensor_id': 'chamber_sensor_id',  # noqa: E501
         'sensor_unit': 'sensor_unit',  # noqa: E501
         'id': 'id',  # noqa: E501
     }
@@ -117,6 +117,7 @@ class Measure(ModelNormal):
         Args:
             current_value (float):
             sensor_unit_id (int):
+            measure_group_id (int):
             chamber_sensor_id (int):
             measure_group_id (int):
 
@@ -180,6 +181,7 @@ class Measure(ModelNormal):
 
         self.current_value = current_value
         self.sensor_unit_id = sensor_unit_id
+        self.measure_group_id = measure_group_id
         self.chamber_sensor_id = chamber_sensor_id
         self.measure_group_id = measure_group_id
         for var_name, var_value in kwargs.items():

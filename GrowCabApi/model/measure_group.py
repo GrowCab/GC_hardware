@@ -91,8 +91,8 @@ class MeasureGroup(ModelNormal):
 
     attribute_map = {
         'actuator_measure': 'actuator_measure',  # noqa: E501
-        'sensor_measure': 'sensor_measure',  # noqa: E501
         'timestamp': 'timestamp',  # noqa: E501
+        'sensor_measure': 'sensor_measure',  # noqa: E501
     }
 
     _composed_schemas = {}

@@ -40,7 +40,7 @@ class BME280(I2C):
 
 
 if __name__ == '__main__':
-	bme = BME280()
+	bme = BME280(bus=SMBus(1))
 	print("Measures: ")
 	print(bme.measures())
 	print(bme.measure("temperature"))

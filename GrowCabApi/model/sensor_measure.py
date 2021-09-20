@@ -82,8 +82,8 @@ class SensorMeasure(ModelNormal):
             'sensor_unit_id': (int,),  # noqa: E501
             'current_value': (float,),  # noqa: E501
             'chamber_sensor_id': (int,),  # noqa: E501
-            'chamber_sensor': (ChamberSensor,),  # noqa: E501
             'sensor_unit': (SensorUnit,),  # noqa: E501
+            'chamber_sensor': (ChamberSensor,),  # noqa: E501
         }
 
     @cached_property
@@ -95,8 +95,8 @@ class SensorMeasure(ModelNormal):
         'sensor_unit_id': 'sensor_unit_id',  # noqa: E501
         'current_value': 'current_value',  # noqa: E501
         'chamber_sensor_id': 'chamber_sensor_id',  # noqa: E501
-        'chamber_sensor': 'chamber_sensor',  # noqa: E501
         'sensor_unit': 'sensor_unit',  # noqa: E501
+        'chamber_sensor': 'chamber_sensor',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -150,8 +150,8 @@ class SensorMeasure(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            chamber_sensor (ChamberSensor): [optional]  # noqa: E501
             sensor_unit (SensorUnit): [optional]  # noqa: E501
+            chamber_sensor (ChamberSensor): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
