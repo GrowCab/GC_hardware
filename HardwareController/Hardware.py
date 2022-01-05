@@ -42,5 +42,11 @@ class Actuator(ABC):
 	@abstractmethod
 	def checkAndActuate(self, value) -> None:
 		pass
-	
 
+	@property
+	def force(self) -> bool:
+		return self.__force
+		
+	@force.setter
+	def force(self, value):
+		self.__force = value

@@ -11,7 +11,7 @@ class SwitchStatus(Enum):
 class Switch(Actuator):
 		
 	def on(self):
-		if self.status != SwitchStatus.ON:
+		if self.status != SwitchStatus.ON or self.force:
 			if self.gpio:
 				GPIO.output(self.control_pin, GPIO.HIGH)
 			else:
@@ -21,7 +21,7 @@ class Switch(Actuator):
 			self.last_change = datetime.now()
 
 	def off(self):
-		if self.status != SwitchStatus.OFF :
+		if self.status != SwitchStatus.OFF or self.force:
 			if self.gpio:
 				GPIO.output(self.control_pin, GPIO.LOW)
 			else:

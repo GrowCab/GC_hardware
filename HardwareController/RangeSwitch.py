@@ -29,6 +29,7 @@ class RangeSwitch(Switch):
 		self.multi_relay = multi_relay
 		self.control_pin = control_pin
 		self.expected_status = None
+		self.force = False
 
 	def controls(self):
 		return self.hardware_label

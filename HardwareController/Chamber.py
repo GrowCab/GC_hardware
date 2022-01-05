@@ -78,6 +78,7 @@ class Chamber:
         self.api_client = api_client
         self.chamber_settings = None
         self.chamber_schedule = None
+        self.force  = True
         self.update_configuration_frequency = update_configuration_frequency
         self.chamber_api = ChambersApi(api_client=self.api_client)
         print("Chamber Setup - Started")
@@ -128,16 +129,24 @@ class Chamber:
         #print("Measuring sensor data")
         chamber_current_measures = ChamberStatus() #The type must be ChamberStatus to be compatible with the backend API. 
         chamber_current_measures['data'] = {}
+        self.force = False
         for s in self.sensors:
             #pp(s)
             sensor_str = str(s)
             chamber_current_measures['data'][sensor_str] = {}
             for measure_type in s.measures():
                 #pp(measure_type)
-                obj = s.measure(measure_type)
-                #pp(obj)
-                measurement = obj.value
-                chamber_current_measures['data'][sensor_str][measure_type] = measurement
+                
+                try:
+                    obj = s.measure(measure_type)
+                    #pp(obj)
+                    measurement = obj.value
+                    chamber_current_measures['data'][sensor_str][measure_type] = measurement
+                except Exception as e:
+                    print(f"Unable to read {sensor_str}:{measure_type}")
+                    self.force = True
+        if self.force:
+            chamber_current_measures = None
         return chamber_current_measures
 
     def saveSensorData(self):
@@ -150,7 +159,9 @@ class Chamber:
             print(f"{e}", file=sys.stderr)
 
     def updateSensorData(self):
-        self.current_status = self.collectSensorData()
+        temp_status = self.collectSensorData()
+        if temp_status:
+            self.current_status = temp_status
 
     def sensorData(self, hardware_label):
         values = self.current_status['data']
@@ -165,14 +176,18 @@ class Chamber:
 
     def updateActuators(self):
         for a in self.actuators:
-            expected_value = self.current_expected_measures[a.hardware_label]['expected_value']
-            a.expected_status = expected_value
-            if a.effect == SwitchEffect.ONOFF:
-                value = expected_value
-            else:
-                value = self.sensorData(a.hardware_label)
-            #pprint(f"New value {value} for {a}")
-            a.checkAndActuate(value)
+            a.force = True
+            try: 
+                expected_value = self.current_expected_measures[a.hardware_label]['expected_value']
+                a.expected_status = expected_value
+                if a.effect == SwitchEffect.ONOFF:
+                    value = expected_value
+                else:
+                    value = self.sensorData(a.hardware_label)
+                #pprint(f"New value {value} for {a}")
+                a.checkAndActuate(value)
+            except Exception as e:
+                print(f"Ubable to change status for {a.hardware_label}")
 
     def stopActuators(self):
         for a in self.actuators:
